@@ -41,13 +41,25 @@ const attiva = (href: string) => percorso.startsWith(href);
 
       {
         sito.collegamenti.sostieni && (
-          <a class="sostieni" href={sito.collegamenti.sostieni} rel="noopener" target="_blank">
+          <a
+            class="sostieni"
+            href={sito.collegamenti.sostieni}
+            rel="noopener"
+            target="_blank"
+            aria-label={`${sito.collegamenti.sostieniEtichetta || 'Offri qualcosa'} — sostieni Pico Edizioni (si apre in una nuova scheda)`}
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z" />
-              <path d="M17 10.5h1.6a2.4 2.4 0 0 1 0 4.8H17" />
-              <path d="M8 5.4c0-.7.6-1 .6-1.7M11.5 5.4c0-.7.6-1 .6-1.7M15 5.4c0-.7.6-1 .6-1.7" />
+              {/* vapore */}
+              <path class="vapore" d="M9.4 2.6c-.7.8-.7 1.6 0 2.4s.7 1.6 0 2.4" />
+              <path class="vapore" d="M13.4 2.6c-.7.8-.7 1.6 0 2.4s.7 1.6 0 2.4" />
+              {/* tazza */}
+              <path d="M4.2 10.2h13.2v3.4a5.1 5.1 0 0 1-5.1 5.1H9.3a5.1 5.1 0 0 1-5.1-5.1v-3.4Z" />
+              {/* manico */}
+              <path d="M17.6 11.4h1.1a2.3 2.3 0 0 1 0 4.6h-1.5" />
+              {/* piattino */}
+              <path d="M2.6 21h16.4" />
             </svg>
-            {sito.collegamenti.sostieniEtichetta || 'Offri qualcosa'}
+            <span>{sito.collegamenti.sostieniEtichetta || 'Offri qualcosa'}</span>
           </a>
         )
       }
@@ -149,41 +161,74 @@ const attiva = (href: string) => percorso.startsWith(href);
     border-bottom-color: var(--zabaione-vivo);
   }
 
-  /* Il collegamento per le donazioni non è una voce di menu come le altre:
-     ha il fondo zabaione, così si vede senza gridare. */
-  .sostieni {
+  /* Il collegamento per le donazioni non è una voce di menu: è un pulsante
+     pieno, in zabaione, con inchiostro scuro sopra. Il colore è fisso nei due
+     temi — è l'unico elemento del sito che deve saltare all'occhio. */
+  /* La specificità deve superare quella di ".navigazione a", altrimenti il
+     colore del testo del menu vince e il pulsante resta illeggibile. */
+  .navigazione a.sostieni {
     display: inline-flex;
     align-items: center;
-    gap: 0.45em;
+    gap: 0.5em;
     font-family: var(--sans);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.07em;
+    font-size: 0.7875rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--inchiostro);
-    background: var(--zabaione-fondo);
+    color: #211c10;
+    background: var(--zabaione);
     border: 1px solid var(--zabaione-vivo);
-    padding: 0.5em 0.9em;
+    padding: 0.62em 1.05em;
     line-height: 1;
     white-space: nowrap;
-    margin-left: 0.5rem;
+    margin-left: 0.6rem;
+    transition: background-color 0.18s ease, transform 0.18s ease,
+      box-shadow 0.18s ease;
   }
 
-  .sostieni:hover {
+  .navigazione a.sostieni:hover {
     background: var(--zabaione-vivo);
-    color: #1c1a16;
+    color: #211c10;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 0 var(--bruno);
+  }
+
+  .sostieni:active {
+    transform: translateY(0);
+    box-shadow: none;
   }
 
   .sostieni svg {
-    width: 1.15em;
-    height: 1.15em;
+    width: 1.2em;
+    height: 1.2em;
     flex: none;
     fill: none;
     stroke: currentColor;
-    stroke-width: 1.6;
+    stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  /* Il vapore si alza appena al passaggio del mouse. */
+  .sostieni .vapore {
+    opacity: 0.75;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  .sostieni:hover .vapore {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sostieni,
+    .sostieni .vapore {
+      transition: none;
+    }
+    .sostieni:hover {
+      transform: none;
+    }
   }
 
   @media (max-width: 34rem) {

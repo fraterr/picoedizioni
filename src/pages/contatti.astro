@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import Email from '../components/Email.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { u } from '../lib/percorsi';
+import sito from '../data/sito.json';
+
+const { collegamenti } = sito;
+---
+
+<Base
+  titolo="Contatti"
+  descrizione="Come scrivere a Pico Edizioni: email, Reddit, Tumblr. E come sostenere il lavoro di traduzione."
+>
+  <div class="contenitore">
+    <article class="pagina">
+      <header class="pagina__apertura">
+        <p class="occhiello">Contatti</p>
+        <h1>Scrivimi</h1>
+        <p class="sommario">
+          Segnalazioni di errori, proposte di testi da tradurre, richieste d'uso
+          fuori licenza: tutto è benvenuto e a tutto rispondo.
+        </p>
+        <div class="filetto-ornato" aria-hidden="true"><span>◆</span></div>
+      </header>
+
+      <div class="vie">
+        <section class="via">
+          <h2 class="occhiello">Per email</h2>
+          <p class="via__principale"><Email /></p>
+          <p class="tenue">
+            È il modo migliore per segnalare un refuso o discutere una scelta di
+            traduzione. Le correzioni finiscono nella versione successiva del
+            file, con un ringraziamento nella nota.
+          </p>
+        </section>
+
+        {
+          collegamenti.reddit && (
+            <section class="via">
+              <h2 class="occhiello">Su Reddit</h2>
+              <p class="via__principale">
+                <a href={collegamenti.reddit} rel="me noopener">r/Pico_Edizioni</a>
+              </p>
+              <p class="tenue">
+                Dove annuncio le nuove traduzioni e dove si discute dei testi.
+              </p>
+            </section>
+          )
+        }
+
+        {
+          collegamenti.tumblr && (
+            <section class="via">
+              <h2 class="occhiello">Su Tumblr</h2>
+              <p class="via__principale">
+                <a href={collegamenti.tumblr} rel="me noopener">pico-edizioni</a>
+              </p>
+              <p class="tenue">Estratti, appunti di lavorazione, citazioni.</p>
+            </section>
+          )
+        }
+
+        {
+          collegamenti.sostieni && (
+            <section class="via via--sostieni">
+              <h2 class="occhiello">Offrire un caffè</h2>
+              <p class="via__principale">
+                <a href={collegamenti.sostieni} rel="noopener">Buy me a coffee</a>
+              </p>
+              <p class="tenue">
+                Del tutto facoltativo. I libri restano gratuiti in ogni caso, e
+                nessuna donazione dà diritto a qualcosa che gli altri non abbiano.
+              </p>
+            </section>
+          )
+        }
+      </div>
+
+      <Newsletter />
+
+      <section class="proponi">
+        <h2>Proporre un testo</h2>
+        <div class="prosa">
+          <p>
+            Se conoscete un testo di pubblico dominio che meriterebbe una
+            traduzione italiana seria e non ce l'ha, scrivetemi. Non basta però
+            il titolo: <strong>spiegatemi perché andrebbe tradotto</strong>. Che
+            cosa contiene che non si trova altrove, perché le versioni in
+            circolazione non bastano, a chi servirebbe. Se di un testo basta il
+            senso generale, esistono già strumenti automatici che lo danno gratis.
+          </p>
+          <p>
+            Da lì comincia la valutazione, che è un lavoro in sé: risalgo alle
+            fonti — quale edizione, di che anno, e se i diritti siano davvero
+            scaduti — e cerco se una traduzione italiana esista già, anche fuori
+            catalogo o sepolta in qualche archivio. Se ne esiste una dignitosa,
+            ve lo dico e il discorso finisce lì.
+          </p>
+          <p>
+            La decisione finale resta mia: traduco soltanto ciò che mi pare
+            davvero necessario tradurre, e soltanto se l'argomento mi interessa.
+            Una casa editrice fatta di una persona sola non ha altri vantaggi;
+            questo, però, non intendo perderlo.
+          </p>
+          <p>
+            Le regole che seguo nel lavoro sono scritte nel
+            <a href={u('/manifesto/')}>manifesto</a>; quelle su che cosa potete
+            fare dei file, nella pagina
+            <a href={u('/pubblico-dominio/')}>pubblico dominio e licenza</a>.
+          </p>
+        </div>
+      </section>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .pagina {
+    max-width: 40rem;
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vw, 5rem) clamp(3.5rem, 9vw, 6rem);
+  }
+
+  .pagina__apertura .occhiello {
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+
+  .pagina__apertura .sommario {
+    margin-top: 1.25rem;
+  }
+
+  .pagina__apertura .filetto-ornato {
+    margin-block: 2.75rem;
+  }
+
+  .vie {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: clamp(2.5rem, 6vw, 3.5rem);
+  }
+
+  .via {
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--filo);
+  }
+
+  .via__principale {
+    font-size: 1.3rem;
+    margin-block: 0.7rem;
+    word-break: break-word;
+  }
+
+  .via .tenue {
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .via--sostieni {
+    border-top-color: var(--zabaione-vivo);
+  }
+
+  .proponi {
+    margin-top: clamp(2.5rem, 6vw, 3.5rem);
+    padding-top: clamp(2rem, 5vw, 3rem);
+    border-top: 1px solid var(--filo);
+  }
+
+  .proponi h2 {
+    margin-bottom: 1.2rem;
+  }
+</style>

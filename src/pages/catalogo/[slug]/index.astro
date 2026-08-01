@@ -1,0 +1,352 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Copertina from '../../../components/Copertina.astro';
+import SchedaCatalogo from '../../../components/SchedaCatalogo.astro';
+import { u, numero, minutiLettura } from '../../../lib/percorsi';
+import { peso } from '../../../lib/file';
+import sito from '../../../data/sito.json';
+
+export async function getStaticPaths() {
+  const libri = await getCollection('libri');
+  return libri.map((libro) => ({ params: { slug: libro.slug }, props: { libro } }));
+}
+
+interface Props {
+  libro: CollectionEntry<'libri'>;
+}
+
+const { libro } = Astro.props;
+const d = libro.data;
+const { Content } = await libro.render();
+
+// L'anteprima si lega al libro tramite il campo "libro", non tramite il nome
+// del file: così il CMS può chiamare i file come vuole.
+const anteprima = (await getCollection('anteprime')).find((a) => a.data.libro === libro.slug);
+
+const pesoEpub = peso(d.epub);
+const pesoPdf = peso(d.pdf);
+
+const altri = (await getCollection('libri'))
+  .filter((l) => l.slug !== libro.slug)
+  .sort((a, b) => b.data.pubblicato.valueOf() - a.data.pubblicato.valueOf())
+  .slice(0, 3);
+
+const datiStrutturati = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  name: d.titolo,
+  author: { '@type': 'Person', name: d.autore },
+  translator: { '@type': 'Organization', name: sito.nome },
+  inLanguage: 'it',
+  numberOfPages: d.pagine,
+  datePublished: d.pubblicato.toISOString().slice(0, 10),
+  isBasedOn: { '@type': 'Book', name: d.titoloOriginale, datePublished: String(d.annoOriginale) },
+  description: d.quarta,
+  license: sito.licenza.url,
+  isAccessibleForFree: true,
+  image: new URL(u(d.copertina), Astro.site).toString(),
+};
+---
+
+<Base titolo={d.titolo} descrizione={d.quarta.slice(0, 190)} immagine={d.copertina} tipo="book">
+  <script
+    slot="testa"
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify(datiStrutturati)}
+  />
+
+  <div class="contenitore">
+    <nav class="briciole" aria-label="Percorso">
+      <a href={u('/catalogo/')}>Catalogo</a>
+      <span aria-hidden="true">→</span>
+      <span aria-current="page">{d.titolo}</span>
+    </nav>
+
+    {/* ── Frontespizio del volume ───────────────────────────────────── */}
+    <div class="volume">
+      <div class="volume__copertina">
+        <Copertina titolo={d.titolo} autore={d.autore} colore={d.colore} />
+      </div>
+
+      <div class="volume__testo">
+        <p class="occhiello">{d.autore}</p>
+        <h1>{d.titolo}</h1>
+        {d.sottotitolo && <p class="volume__sottotitolo">{d.sottotitolo}</p>}
+
+        <p class="volume__originale tenue">
+          Titolo originale: <em>{d.titoloOriginale}</em>, {d.annoOriginale}.<br />
+          Traduzione italiana di Pico Edizioni, {d.annoTraduzione}.
+        </p>
+
+        <p class="volume__quarta">{d.quarta}</p>
+
+        <dl class="dati">
+          <div><dt>Pagine</dt><dd>{numero(d.pagine)}</dd></div>
+          <div><dt>Parole</dt><dd>{numero(d.parole)}</dd></div>
+          <div><dt>Lettura</dt><dd>{minutiLettura(d.parole)} min</dd></div>
+          <div><dt>Prezzo</dt><dd>Gratuito</dd></div>
+        </dl>
+
+        <div class="scarica non-stampare">
+          <p class="occhiello">Scarica</p>
+          <div class="scarica__bottoni">
+            <a class="bottone" href={u(d.epub)} download>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round" />
+              </svg>
+              ePub{pesoEpub && <span class="peso"> · {pesoEpub}</span>}
+            </a>
+
+            {
+              pesoPdf ? (
+                <a class="bottone bottone--vuoto" href={u(d.pdf)} download>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                    <path d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke-linecap="round" />
+                  </svg>
+                  PDF<span class="peso"> · {pesoPdf}</span>
+                </a>
+              ) : (
+                <span class="in-arrivo tenue">Il PDF è in preparazione</span>
+              )
+            }
+
+            {
+              anteprima && (
+                <a class="bottone bottone--vuoto" href={u(`/catalogo/${libro.slug}/anteprima/`)}>
+                  Leggi l'anteprima
+                </a>
+              )
+            }
+          </div>
+          <p class="scarica__nota tenue">
+            Nessuna registrazione, nessuna email. Il testo originale è di pubblico
+            dominio; la traduzione è distribuita sotto licenza
+            <a href={sito.licenza.url} rel="license noopener">{sito.licenza.nome}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* ── Indice e nota ─────────────────────────────────────────────── */}
+    <div class="apparato">
+      {
+        d.indice.length > 0 && (
+          <aside class="indice">
+            <h2 class="occhiello">Indice</h2>
+            <ol>
+              {d.indice.map((voce) => (
+                <li>{voce}</li>
+              ))}
+            </ol>
+          </aside>
+        )
+      }
+
+      <section class="nota">
+        <h2>Nota del traduttore</h2>
+        <div class="prosa">
+          <Content />
+        </div>
+      </section>
+    </div>
+
+    {
+      altri.length > 0 && (
+        <section class="altri">
+          <h2 class="occhiello">Altre traduzioni</h2>
+          <div class="altri__griglia">
+            {altri.map((l) => (
+              <SchedaCatalogo libro={l} />
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </div>
+</Base>
+
+<style>
+  .briciole {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--inchiostro-lieve);
+    padding-block: 1.75rem 0;
+  }
+
+  .briciole a {
+    text-decoration: none;
+  }
+
+  .briciole a:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .volume {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 6vw, 4.5rem);
+    align-items: start;
+    padding-block: clamp(2rem, 6vw, 3.5rem) clamp(3rem, 8vw, 5rem);
+  }
+
+  .volume__copertina {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .volume__testo > * + * {
+    margin-top: 1.1rem;
+  }
+
+  .volume__testo h1 {
+    margin-top: 0.5rem;
+  }
+
+  .volume__sottotitolo {
+    font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem);
+    font-style: italic;
+    color: var(--inchiostro-tenue);
+    line-height: 1.3;
+  }
+
+  .volume__originale {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--filo);
+  }
+
+  .volume__quarta {
+    font-size: clamp(1.05rem, 1rem + 0.35vw, 1.18rem);
+  }
+
+  .dati {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
+    gap: 1rem;
+    padding-block: 1.4rem;
+    border-block: 1px solid var(--filo);
+    margin-top: 1.8rem;
+  }
+
+  .dati dt {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--inchiostro-lieve);
+    margin-bottom: 0.3rem;
+  }
+
+  .dati dd {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .scarica {
+    margin-top: 2rem;
+  }
+
+  .scarica__bottoni {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7rem;
+    margin-top: 0.9rem;
+  }
+
+  .peso {
+    opacity: 0.7;
+    font-weight: 400;
+  }
+
+  .in-arrivo {
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .scarica__nota {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-top: 1rem;
+    max-width: 34rem;
+  }
+
+  .apparato {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 6vw, 4.5rem);
+    align-items: start;
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+    border-top: 1px solid var(--filo);
+    padding-top: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .indice ol {
+    list-style: none;
+    counter-reset: voce;
+    margin: 1rem 0 0;
+    padding: 0;
+  }
+
+  .indice li {
+    counter-increment: voce;
+    display: flex;
+    gap: 0.8rem;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--filo-tenue);
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .indice li::before {
+    content: counter(voce, upper-roman);
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--inchiostro-lieve);
+    padding-top: 0.35em;
+    min-width: 2.2em;
+    text-align: right;
+    flex: none;
+  }
+
+  .nota h2 {
+    margin-bottom: 1.4rem;
+  }
+
+  .altri {
+    border-top: 1px solid var(--filo);
+    padding-block: clamp(2.5rem, 6vw, 4rem) clamp(3rem, 8vw, 5rem);
+  }
+
+  .altri__griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: clamp(2rem, 5vw, 3rem);
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 52rem) {
+    .volume,
+    .apparato {
+      grid-template-columns: 1fr;
+    }
+    .volume__copertina {
+      position: static;
+      max-width: 17rem;
+    }
+  }
+</style>

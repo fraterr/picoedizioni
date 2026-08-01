@@ -1,0 +1,41 @@
+---
+// L'indirizzo non compare mai in chiaro nel sorgente della pagina: viene
+// ricomposto dal browser. Non ferma un raccoglitore determinato, ma toglie di
+// mezzo la quasi totalità di quelli automatici.
+import sito from '../data/sito.json';
+
+interface Props {
+  etichetta?: string;
+  class?: string;
+}
+const { etichetta, class: classe = '' } = Astro.props;
+
+const [utente, dominio] = sito.email.split('@');
+---
+
+<span
+  class={`email ${classe}`}
+  data-utente={utente}
+  data-dominio={dominio}
+  data-etichetta={etichetta ?? ''}
+>
+  <noscript>{utente} chiocciola {dominio}</noscript>
+</span>
+
+<script>
+  for (const nodo of document.querySelectorAll<HTMLElement>('.email')) {
+    const { utente, dominio, etichetta } = nodo.dataset;
+    if (!utente || !dominio) continue;
+    const indirizzo = `${utente}@${dominio}`;
+    const collegamento = document.createElement('a');
+    collegamento.href = `mailto:${indirizzo}`;
+    collegamento.textContent = etichetta || indirizzo;
+    nodo.replaceChildren(collegamento);
+  }
+</script>
+
+<style>
+  .email {
+    word-break: break-word;
+  }
+</style>

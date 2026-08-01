@@ -1,0 +1,94 @@
+---
+// Interruttore chiaro/scuro. Senza JavaScript resta invisibile e il sito
+// segue comunque la preferenza di sistema.
+---
+
+<button
+  class="interruttore non-stampare"
+  type="button"
+  data-interruttore-tema
+  hidden
+  aria-label="Cambia tema"
+  title="Cambia tema"
+>
+  <svg class="icona icona--sole" viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="4.2" />
+    <g stroke-linecap="round">
+      <path d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M19.1 4.9l-1.7 1.7M6.6 17.4l-1.7 1.7" />
+    </g>
+  </svg>
+  <svg class="icona icona--luna" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1z" />
+  </svg>
+</button>
+
+<style>
+  .interruttore {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    padding: 0;
+    background: none;
+    border: 1px solid transparent;
+    color: var(--inchiostro-tenue);
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .interruttore:hover {
+    color: var(--inchiostro);
+    border-color: var(--filo);
+  }
+
+  .icona {
+    grid-area: 1 / 1;
+    width: 1.05rem;
+    height: 1.05rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+
+  /* Si mostra l'icona di ciò che si otterrà premendo. */
+  .icona--sole {
+    display: none;
+  }
+
+  :global(html[data-tema='scuro']) .icona--sole {
+    display: block;
+  }
+
+  :global(html[data-tema='scuro']) .icona--luna {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html:not([data-tema='chiaro'])) .icona--sole {
+      display: block;
+    }
+    :global(html:not([data-tema='chiaro'])) .icona--luna {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const bottone = document.querySelector<HTMLButtonElement>('[data-interruttore-tema]');
+  if (bottone) {
+    bottone.hidden = false;
+    bottone.addEventListener('click', () => {
+      const scuroDiSistema = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const attuale = document.documentElement.dataset.tema ?? (scuroDiSistema ? 'scuro' : 'chiaro');
+      const nuovo = attuale === 'scuro' ? 'chiaro' : 'scuro';
+      document.documentElement.dataset.tema = nuovo;
+      try {
+        // Se la scelta coincide con quella di sistema si torna a "automatico".
+        if ((nuovo === 'scuro') === scuroDiSistema) localStorage.removeItem('tema');
+        else localStorage.setItem('tema', nuovo);
+      } catch {
+        /* navigazione privata: pazienza, la scelta vale per questa sessione */
+      }
+    });
+  }
+</script>

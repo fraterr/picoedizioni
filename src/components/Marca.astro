@@ -1,0 +1,39 @@
+---
+// Marca tipografica di Pico Edizioni.
+// Un'iniziale entro un doppio anello, alla maniera delle marche degli
+// stampatori rinascimentali. Disegnata in tracciati, non in caratteri:
+// resta identica ovunque e resta leggibile anche a 20 px.
+interface Props {
+  dimensione?: number;
+  titolo?: string;
+  class?: string;
+}
+const { dimensione = 48, titolo = 'Pico Edizioni', class: classe = '' } = Astro.props;
+---
+
+<svg
+  class={`marca ${classe}`}
+  width={dimensione}
+  height={dimensione}
+  viewBox="0 0 100 100"
+  role="img"
+  aria-label={titolo}
+  fill="none"
+>
+  <title>{titolo}</title>
+  <circle cx="50" cy="50" r="46.2" stroke="currentColor" stroke-width="1.6" />
+  <circle cx="50" cy="50" r="41.4" stroke="currentColor" stroke-width="0.7" opacity="0.55" />
+  <path
+    fill="currentColor"
+    fill-rule="evenodd"
+    d="M40 28 L58 28 C68.5 28 73 32.5 73 40 C73 47.5 68.5 52 58 52 L46 52 L46 69 L55 69 L55 72 L31 72 L31 69 L40 69 Z
+       M46 33.5 L57.5 33.5 C62.5 33.5 66 35.8 66 40 C66 44.2 62.5 46.5 57.5 46.5 L46 46.5 Z"
+  />
+  <path d="M50 78.5 L52 81 L50 83.5 L48 81 Z" fill="currentColor" opacity="0.75" />
+</svg>
+
+<style>
+  .marca {
+    flex: none;
+  }
+</style>

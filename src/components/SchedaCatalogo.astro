@@ -1,0 +1,80 @@
+---
+import Copertina from './Copertina.astro';
+import { u, numero } from '../lib/percorsi';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  libro: CollectionEntry<'libri'>;
+}
+
+const { libro } = Astro.props;
+const d = libro.data;
+const indirizzo = u(`/catalogo/${libro.slug}/`);
+---
+
+<article class="scheda">
+  <a class="scheda__collegamento" href={indirizzo}>
+    <Copertina titolo={d.titolo} autore={d.autore} colore={d.colore} />
+    <div class="scheda__testo">
+      <p class="occhiello">{d.autore}</p>
+      <h3 class="scheda__titolo">{d.titolo}</h3>
+      {d.sottotitolo && <p class="scheda__sottotitolo">{d.sottotitolo}</p>}
+      <p class="scheda__dati tenue">
+        <span>{d.titoloOriginale.split('.')[0]}, {d.annoOriginale}</span>
+        <span aria-hidden="true"> · </span>
+        <span>{numero(d.pagine)} pagine</span>
+      </p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .scheda__collegamento {
+    display: grid;
+    gap: 1.1rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .scheda__collegamento:hover {
+    color: inherit;
+  }
+
+  .scheda__collegamento :global(.copertina) {
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .scheda__collegamento:hover :global(.copertina) {
+    border-color: var(--zabaione-vivo);
+    transform: translateY(-3px);
+  }
+
+  .scheda__testo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .scheda__titolo {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .scheda__collegamento:hover .scheda__titolo {
+    text-decoration: underline;
+    text-decoration-color: var(--zabaione-vivo);
+    text-underline-offset: 0.2em;
+  }
+
+  .scheda__sottotitolo {
+    font-style: italic;
+    color: var(--inchiostro-tenue);
+    line-height: 1.3;
+  }
+
+  .scheda__dati {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+</style>

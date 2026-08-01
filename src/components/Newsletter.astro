@@ -1,0 +1,72 @@
+---
+import sito from '../data/sito.json';
+
+// Il modulo compare solo quando la newsletter è attiva in src/data/sito.json.
+// Funziona senza JavaScript: è un normale invio di form al servizio esterno.
+const { attiva, azione, testo } = sito.newsletter;
+---
+
+{
+  attiva && azione && (
+    <section class="newsletter" aria-labelledby="titolo-newsletter">
+      <h2 id="titolo-newsletter" class="occhiello">Nuove traduzioni</h2>
+      <p class="newsletter__testo">{testo}</p>
+      <form action={azione} method="post" target="_blank" class="newsletter__modulo">
+        <label class="solo-lettori-schermo" for="email-newsletter">Il tuo indirizzo email</label>
+        <input
+          id="email-newsletter"
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="il-tuo-indirizzo@esempio.it"
+        />
+        <button type="submit" class="bottone">Iscriviti</button>
+      </form>
+      <p class="newsletter__nota tenue">
+        Nessun altro uso dell'indirizzo. Ci si cancella con un clic.
+      </p>
+    </section>
+  )
+}
+
+<style>
+  .newsletter {
+    border: 1px solid var(--filo);
+    background: var(--carta-scheda);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .newsletter__testo {
+    margin-top: 0.7rem;
+    max-width: 32rem;
+  }
+
+  .newsletter__modulo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.2rem;
+  }
+
+  .newsletter__modulo input {
+    flex: 1 1 16rem;
+    font-family: var(--serif);
+    font-size: 1rem;
+    padding: 0.8em 1em;
+    border: 1px solid var(--filo);
+    background: var(--carta);
+    color: var(--inchiostro);
+  }
+
+  .newsletter__modulo input:focus-visible {
+    outline: 2px solid var(--zabaione-vivo);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+
+  .newsletter__nota {
+    margin-top: 0.9rem;
+    font-size: 0.85rem;
+  }
+</style>

@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Marca from '../components/Marca.astro';
+import { u } from '../lib/percorsi';
+---
+
+<Base titolo="Pagina non trovata" descrizione="La pagina cercata non esiste.">
+  <div class="contenitore vuoto">
+    <Marca dimensione={64} />
+    <p class="occhiello">Errore 404</p>
+    <h1>Questa pagina non esiste</h1>
+    <p class="sommario">
+      Forse l'indirizzo è cambiato, forse la pagina non c'è mai stata.
+      In entrambi i casi il catalogo è a un clic di distanza.
+    </p>
+    <p class="azioni">
+      <a class="bottone" href={u('/catalogo/')}>Vai al catalogo</a>
+      <a class="bottone bottone--vuoto" href={u('/')}>Pagina iniziale</a>
+    </p>
+  </div>
+</Base>
+
+<style>
+  .vuoto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    max-width: 34rem;
+    padding-block: clamp(4rem, 12vw, 8rem);
+  }
+
+  .vuoto :global(.marca) {
+    color: var(--filo);
+    margin-bottom: 1rem;
+  }
+
+  .azioni {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+</style>

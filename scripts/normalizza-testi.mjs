@@ -1,0 +1,205 @@
+#!/usr/bin/env node
+// ─────────────────────────────────────────────────────────────────────────────
+// NORMALIZZAZIONE TIPOGRAFICA
+//
+// Applica ai testi in src/content/testi/ le convenzioni dell'editoria
+// italiana, e da lì rigenera le anteprime.
+//
+// Che cosa tocca — solo forma, mai sostanza:
+//   · virgolette dritte  "…"      →  caporali  «…»
+//   · apostrofo dritto   l'uomo   →  tipografico  l’uomo
+//   · trattini fra spazi  -  – —  →  lineetta media  –
+//   · punti di sospensione  ...   →  …
+//   · spazi doppi e spazi prima della punteggiatura
+//   · riferimenti biblici  [Esodo 31:15, Levitico 23:3]
+//                                →  [Esodo 31,15; Levitico 23,3]
+//   · titoli dei capitoli: numerale minuscolo, lineetta media,
+//     titolo dal maiuscolo integrale al maiuscolo iniziale
+//
+// Non tocca una sola parola del testo tradotto.
+//
+// Uso:  npm run normalizza -- --prova     (mostra e non scrive)
+//       npm run normalizza                (scrive)
+// ─────────────────────────────────────────────────────────────────────────────
+import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const RADICE = join(dirname(fileURLToPath(import.meta.url)), '..');
+const DIR_TESTI = join(RADICE, 'src', 'content', 'testi');
+const DIR_ANTEPRIME = join(RADICE, 'src', 'content', 'anteprime');
+const PAROLE_ANTEPRIMA = 1200;
+
+const prova = process.argv.includes('--prova');
+
+// Nomi propri da conservare maiuscoli quando si scioglie un titolo tutto
+// in capitali. Elenco volutamente corto: si allunga quando serve.
+const NOMI_PROPRI = [
+  'Dio',
+  'Sabbath',
+  'Bibbia',
+  'Cristo',
+  'Gesù',
+  'Israele',
+  'Signore',
+  'Spirito',
+];
+
+/** Da MAIUSCOLO INTEGRALE a Maiuscolo iniziale, salvando i nomi propri. */
+function scioglMaiuscole(titolo) {
+  const lettere = titolo.replace(/[^A-Za-zÀ-ÿ]/g, '');
+  const quanteAlte = (titolo.match(/[A-ZÀ-Ý]/g) || []).length;
+  if (!lettere.length || quanteAlte / lettere.length < 0.7) return titolo;
+
+  let risultato = titolo.toLowerCase();
+  risultato = risultato.charAt(0).toUpperCase() + risultato.slice(1);
+  for (const nome of NOMI_PROPRI) {
+    risultato = risultato.replace(
+      new RegExp(`\\b${nome.toLowerCase()}\\b`, 'g'),
+      nome
+    );
+  }
+  return risultato;
+}
+
+/** Le virgolette dritte diventano caporali, alternando apertura e chiusura. */
+function caporali(testo) {
+  let aperta = false;
+  return testo.replace(/"/g, () => {
+    aperta = !aperta;
+    return aperta ? '«' : '»';
+  });
+}
+
+function normalizzaTitolo(riga) {
+  let t = riga.replace(/^##\s+/, '').trim();
+
+  // separatore uniforme
+  t = t.replace(/\s*[-–—]\s*/, ' – ');
+
+  // "Capitolo Uno" → "Capitolo uno"
+  t = t.replace(/^(Capitolo)\s+(\S+)/i, (_, cap, num) => {
+    return `${cap.charAt(0).toUpperCase()}${cap.slice(1).toLowerCase()} ${num.toLowerCase()}`;
+  });
+
+  // "PREFAZIONE" → "Prefazione"
+  const pezzi = t.split(' – ');
+  if (pezzi.length === 2) t = `${pezzi[0]} – ${scioglMaiuscole(pezzi[1])}`;
+  else t = scioglMaiuscole(t);
+
+  // anche i titoli vogliono l’apostrofo tipografico
+  t = t.replace(/(?<=[A-Za-zÀ-ÿ])'/g, '’');
+
+  return `## ${t}`;
+}
+
+function normalizzaCorpo(testo) {
+  let t = testo;
+
+  // 1. residuo di conversione: la firma dell'autore inglobata nel testo,
+  //    seguita dalla ripetizione del titolo.
+  t = t.replace(/\s+-\s+(NEVILLE)\s+Il segreto è sentire\s*$/m, '\n\n$1');
+
+  // 2. riferimenti biblici
+  t = t.replace(/\[\s*-\s*/g, '[');
+  t = t.replace(/\[([^\]]+)\]/g, (intero, dentro) => {
+    if (!/\d+:\d+/.test(dentro)) return intero;
+    const pulito = dentro
+      .replace(/(\d+):(\d+)/g, '$1,$2')
+      .replace(/,\s*(?=[A-ZÀ-Ý1-9][a-zà-ÿ]*\.?\s*\d+,)/g, '; ');
+    return `[${pulito}]`;
+  });
+
+  // 3. punti di sospensione
+  t = t.replace(/\.\.\./g, '…');
+
+  // 4. virgolette: prima si tolgono gli spazi interni, poi si convertono
+  t = t.replace(/"\s+/g, '"').replace(/\s+"/g, '"');
+  t = caporali(t);
+  // ricompone lo spazio dopo la chiusura, se manca
+  t = t.replace(/»(?=[A-Za-zÀ-ÿ])/g, '» ');
+  t = t.replace(/(?<=[A-Za-zÀ-ÿ,;])«/g, ' «');
+
+  // 5. apostrofo tipografico dopo lettera: elisione (l’uomo, dell’«IO SONO»)
+  //    e troncamento (un po’). Il glifo è lo stesso in entrambi i casi.
+  t = t.replace(/(?<=[A-Za-zÀ-ÿ])'/g, '’');
+
+  // 6. lineette
+  t = t.replace(/\s+[-–—]{1,2}\s+/g, ' – ');
+
+  // 7. spaziature
+  t = t.replace(/[ \t]+([,.;:!?])/g, '$1');
+  t = t.replace(/[ \t]{2,}/g, ' ');
+  t = t.replace(/[ \t]+$/gm, '');
+
+  return t;
+}
+
+// ── esecuzione ──────────────────────────────────────────────────────────────
+const conta = (t, r) => (t.match(r) || []).length;
+
+for (const file of readdirSync(DIR_TESTI).filter((f) => f.endsWith('.md'))) {
+  const percorso = join(DIR_TESTI, file);
+  const sorgente = readFileSync(percorso, 'utf8');
+  const frontmatter = sorgente.match(/^---[\s\S]*?---\n/)[0];
+  const corpo = sorgente.slice(frontmatter.length);
+
+  const prima = {
+    virgolette: conta(corpo, /"/g),
+    apostrofi: conta(corpo, /'/g),
+    trattini: conta(corpo, /\s-\s/g),
+    ellissi: conta(corpo, /\.\.\./g),
+    duePunti: conta(corpo, /\[[^\]]*\d+:\d+[^\]]*\]/g),
+  };
+
+  const blocchi = corpo.split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
+  const nuovi = blocchi.map((b) =>
+    b.startsWith('## ') ? normalizzaTitolo(b) : normalizzaCorpo(b)
+  );
+  // la firma può aver generato un doppio blocco: si ridivide
+  const finali = nuovi.join('\n\n').split(/\n{2,}/).map((b) => b.trim()).filter(Boolean);
+
+  const nuovoCorpo = '\n' + finali.join('\n\n') + '\n';
+
+  const dopo = {
+    virgolette: conta(nuovoCorpo, /"/g),
+    apostrofi: conta(nuovoCorpo, /'/g),
+    trattini: conta(nuovoCorpo, /\s-\s/g),
+    ellissi: conta(nuovoCorpo, /\.\.\./g),
+    duePunti: conta(nuovoCorpo, /\[[^\]]*\d+:\d+[^\]]*\]/g),
+  };
+
+  console.log(`\n══ ${file.replace('.md', '')}`);
+  for (const chiave of Object.keys(prima)) {
+    if (prima[chiave] || dopo[chiave]) {
+      console.log(`   ${chiave.padEnd(12)} ${String(prima[chiave]).padStart(4)} → ${dopo[chiave]}`);
+    }
+  }
+  console.log('   titoli normalizzati:');
+  finali
+    .filter((b) => b.startsWith('## '))
+    .forEach((t) => console.log(`      · ${t.slice(3)}`));
+
+  if (!prova) {
+    writeFileSync(percorso, frontmatter + nuovoCorpo, 'utf8');
+
+    // l'anteprima si ricava dal testo normalizzato, non più dall'ePub
+    const scelti = [];
+    let parole = 0;
+    for (const blocco of finali) {
+      if (parole >= PAROLE_ANTEPRIMA && blocco.startsWith('## ')) break;
+      scelti.push(blocco);
+      parole += blocco.split(/\s+/).length;
+    }
+    mkdirSync(DIR_ANTEPRIME, { recursive: true });
+    const slug = file.replace('.md', '');
+    writeFileSync(
+      join(DIR_ANTEPRIME, file),
+      `---\nlibro: ${slug}\nparole: ${parole}\n---\n\n${scelti.join('\n\n')}\n`,
+      'utf8'
+    );
+    console.log(`   anteprima rigenerata: ${parole} parole`);
+  }
+}
+
+console.log(prova ? '\n(prova: non ho scritto niente)\n' : '');

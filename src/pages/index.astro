@@ -1,0 +1,196 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SchedaCatalogo from '../components/SchedaCatalogo.astro';
+import Newsletter from '../components/Newsletter.astro';
+import Marca from '../components/Marca.astro';
+import { u } from '../lib/percorsi';
+import sito from '../data/sito.json';
+
+const libri = (await getCollection('libri')).sort(
+  (a, b) => b.data.pubblicato.valueOf() - a.data.pubblicato.valueOf()
+);
+const inEvidenza = libri.filter((l) => l.data.inEvidenza).slice(0, 3);
+const daMostrare = inEvidenza.length > 0 ? inEvidenza : libri.slice(0, 3);
+---
+
+<Base titolo={sito.nome} tipo="website">
+  {/* ── Frontespizio ──────────────────────────────────────────────────── */}
+  <section class="frontespizio">
+    <div class="contenitore frontespizio__interno">
+      <Marca dimensione={72} class="frontespizio__marca" />
+      <h1 class="frontespizio__titolo">Pico Edizioni</h1>
+      <p class="frontespizio__motto">
+        <em>{sito.motto}</em>
+      </p>
+      <p class="frontespizio__glossa tenue">
+        «{sito.mottoTraduzione}» — {sito.mottoFonte}
+      </p>
+      <div class="filetto-ornato frontespizio__filetto" aria-hidden="true"><span>◆</span></div>
+      <p class="frontespizio__sommario">
+        Traduco in italiano testi di pubblico dominio che esigono una traduzione
+        rigorosa: New Thought, filosofia dell'uomo interiore, tradizione esoterica.
+        I libri si scaricano gratuitamente, non sono in vendita e non lo saranno mai.
+      </p>
+      <p class="frontespizio__azioni">
+        <a class="bottone" href={u('/catalogo/')}>Vai al catalogo</a>
+        <a class="bottone bottone--vuoto" href={u('/manifesto/')}>Leggi il manifesto</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ── I libri ───────────────────────────────────────────────────────── */}
+  <section class="sezione">
+    <div class="contenitore">
+      <header class="intestazione-sezione">
+        <h2>Il catalogo</h2>
+      </header>
+
+      <div class="griglia-libri">
+        {daMostrare.map((libro) => <SchedaCatalogo libro={libro} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Come traduco ──────────────────────────────────────────────────── */}
+  <section class="sezione sezione--fondo">
+    <div class="contenitore">
+      <div class="due-colonne">
+        <div>
+          <p class="occhiello">Il metodo</p>
+          <h2>Una traduzione che si può verificare</h2>
+        </div>
+        <div class="prosa">
+          <p>
+            Un testo che ragiona sul significato preciso di una parola non
+            sopravvive a una traduzione approssimativa: quando il lessico si
+            sfalda, l'argomento sparisce. Per questo ogni termine tecnico riceve
+            un traducente fisso che non cambia mai, e ogni volume porta una nota
+            in cui le scelte discutibili sono dichiarate invece che nascoste.
+          </p>
+          <p>
+            Si traduce sempre dall'originale, mai da una versione intermedia. Dove
+            l'autore è oscuro, la traduzione resta oscura e la nota spiega perché.
+          </p>
+          <p>
+            <a href={u('/manifesto/')}>Il manifesto per esteso →</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contenitore sezione--stretta">
+    <Newsletter />
+  </div>
+</Base>
+
+<style>
+  .frontespizio {
+    border-bottom: 1px solid var(--filo);
+    padding-block: clamp(3.5rem, 10vw, 7rem);
+    background:
+      radial-gradient(
+        ellipse 60% 50% at 50% 0%,
+        var(--zabaione-fondo) 0%,
+        transparent 70%
+      ),
+      var(--carta);
+  }
+
+  .frontespizio__interno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 44rem;
+  }
+
+  .frontespizio__marca {
+    color: var(--inchiostro);
+    margin-bottom: 1.75rem;
+  }
+
+  .frontespizio__titolo {
+    font-family: var(--sans);
+    font-size: clamp(1.35rem, 1rem + 1.8vw, 2rem);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    text-indent: 0.3em; /* compensa la spaziatura sull'ultima lettera */
+  }
+
+  .frontespizio__motto {
+    margin-top: 1.6rem;
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.4rem);
+    line-height: 1.25;
+  }
+
+  .frontespizio__glossa {
+    margin-top: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .frontespizio__filetto {
+    width: min(20rem, 70%);
+    margin-block: 2.5rem;
+  }
+
+  .frontespizio__sommario {
+    max-width: 36rem;
+    font-size: clamp(1.05rem, 1rem + 0.35vw, 1.2rem);
+    color: var(--inchiostro-tenue);
+  }
+
+  .frontespizio__azioni {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 2.25rem;
+  }
+
+  .intestazione-sezione {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-bottom: 1.25rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--filo);
+  }
+
+  .griglia-libri {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .sezione--fondo {
+    background: var(--carta-alt);
+    border-block: 1px solid var(--filo);
+  }
+
+  .due-colonne {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: start;
+  }
+
+  .due-colonne .occhiello {
+    display: block;
+    margin-bottom: 0.7rem;
+  }
+
+  .sezione--stretta {
+    padding-block: clamp(3rem, 8vw, 5rem);
+  }
+
+  @media (max-width: 46rem) {
+    .due-colonne {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

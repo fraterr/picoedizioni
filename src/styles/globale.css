@@ -1,0 +1,387 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PICO EDIZIONI — foglio di stile principale
+   Ispirazione: la sobrietà tipografica della tradizione editoriale italiana.
+   Carta avorio, inchiostro caldo, un solo accento (giallo zabaione), filetti
+   sottili, molto respiro. Nessuna ombra, nessun gradiente, nessuna animazione
+   gratuita.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Variabili ─────────────────────────────────────────────────────────── */
+:root {
+  /* Colori — tema chiaro */
+  --carta: #fbf8f1;
+  --carta-alt: #f4eee1;
+  --carta-scheda: #fffdf8;
+  --inchiostro: #1c1a16;
+  --inchiostro-tenue: #5c564a;
+  --inchiostro-lieve: #8c8579;
+  --zabaione: #f0d68c;
+  --zabaione-vivo: #e6c25e;
+  --zabaione-fondo: #f9eeca;
+  --bruno: #8a6d2f;
+  --filo: #ddd5c4;
+  --filo-tenue: #ebe4d5;
+
+  /* Tipografia */
+  --serif: 'EB Garamond', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --sans: 'Inter Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Ritmo verticale e misure */
+  --misura: 34rem;         /* larghezza ideale di una colonna di testo */
+  --misura-larga: 72rem;   /* larghezza massima della pagina */
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --spazio-sezione: clamp(4rem, 10vw, 8rem);
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='chiaro']) {
+    --carta: #14120e;
+    --carta-alt: #1b1914;
+    --carta-scheda: #1e1b15;
+    --inchiostro: #ece5d6;
+    --inchiostro-tenue: #a89f8c;
+    --inchiostro-lieve: #7b7364;
+    --zabaione: #e8c86a;
+    --zabaione-vivo: #f0d68c;
+    --zabaione-fondo: #2b2517;
+    --bruno: #e0c281;
+    --filo: #35301f;
+    --filo-tenue: #262218;
+    color-scheme: dark;
+  }
+}
+
+:root[data-tema='scuro'] {
+  --carta: #14120e;
+  --carta-alt: #1b1914;
+  --carta-scheda: #1e1b15;
+  --inchiostro: #ece5d6;
+  --inchiostro-tenue: #a89f8c;
+  --inchiostro-lieve: #7b7364;
+  --zabaione: #e8c86a;
+  --zabaione-vivo: #f0d68c;
+  --zabaione-fondo: #2b2517;
+  --bruno: #e0c281;
+  --filo: #35301f;
+  --filo-tenue: #262218;
+  color-scheme: dark;
+}
+
+:root[data-tema='chiaro'] {
+  color-scheme: light;
+}
+
+/* ── 2. Azzeramento ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background: var(--carta);
+  color: var(--inchiostro);
+  font-family: var(--serif);
+  font-size: clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem);
+  line-height: 1.65;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── 3. Tipografia ────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  line-height: 1.18;
+  text-wrap: balance;
+  letter-spacing: -0.005em;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 1.6rem + 3.2vw, 4rem);
+  font-weight: 400;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 1.3rem + 1.5vw, 2.35rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--zabaione-vivo);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+a:hover {
+  color: var(--bruno);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--zabaione-vivo);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--zabaione);
+  color: #1c1a16;
+}
+
+/* Occhiello: piccole maiuscole spaziate, usato per etichette e sopratitoli */
+.occhiello {
+  font-family: var(--sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--inchiostro-lieve);
+  font-feature-settings: normal;
+}
+
+.sommario {
+  font-size: clamp(1.125rem, 1.02rem + 0.5vw, 1.4rem);
+  line-height: 1.55;
+  color: var(--inchiostro-tenue);
+  font-style: italic;
+}
+
+.tenue {
+  color: var(--inchiostro-tenue);
+}
+
+/* ── 4. Impaginazione ─────────────────────────────────────────────────────── */
+.contenitore {
+  width: 100%;
+  max-width: var(--misura-larga);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.colonna {
+  max-width: var(--misura);
+  margin-inline: auto;
+}
+
+.sezione {
+  padding-block: var(--spazio-sezione);
+}
+
+.filetto {
+  border: 0;
+  border-top: 1px solid var(--filo);
+  margin-block: 0;
+}
+
+/* Filetto ornato: un piccolo rombo al centro, alla maniera dei frontespizi */
+.filetto-ornato {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--filo);
+}
+
+.filetto-ornato::before,
+.filetto-ornato::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+}
+
+.filetto-ornato span {
+  color: var(--zabaione-vivo);
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* ── 5. Testo lungo (prosa) ───────────────────────────────────────────────── */
+.prosa > * + * {
+  margin-top: 1.15em;
+}
+
+.prosa h2 {
+  margin-top: 2.4em;
+  margin-bottom: 0.6em;
+}
+
+.prosa h3 {
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+}
+
+.prosa h2:first-child,
+.prosa h3:first-child {
+  margin-top: 0;
+}
+
+.prosa blockquote {
+  margin-inline: 0;
+  padding-left: 1.4em;
+  border-left: 2px solid var(--zabaione);
+  font-style: italic;
+  color: var(--inchiostro-tenue);
+}
+
+.prosa ul,
+.prosa ol {
+  padding-left: 1.3em;
+}
+
+.prosa li + li {
+  margin-top: 0.4em;
+}
+
+.prosa strong {
+  font-weight: 600;
+}
+
+/* Capolettera per l'apertura dei testi letterari */
+.prosa--capolettera > p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.6em;
+  line-height: 0.82;
+  padding-right: 0.09em;
+  padding-top: 0.06em;
+  font-weight: 400;
+  color: var(--bruno);
+}
+
+/* ── 6. Bottoni ───────────────────────────────────────────────────────────── */
+.bottone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.85em 1.5em;
+  border: 1px solid var(--inchiostro);
+  background: var(--inchiostro);
+  color: var(--carta);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.bottone:hover {
+  background: var(--bruno);
+  border-color: var(--bruno);
+  color: #fffdf8;
+}
+
+.bottone--vuoto {
+  background: transparent;
+  color: var(--inchiostro);
+  border-color: var(--filo);
+}
+
+.bottone--vuoto:hover {
+  background: var(--zabaione-fondo);
+  border-color: var(--zabaione-vivo);
+  color: var(--inchiostro);
+}
+
+.bottone svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+}
+
+/* ── 7. Utilità ───────────────────────────────────────────────────────────── */
+.solo-lettori-schermo {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.salta-al-contenuto {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 100;
+  background: var(--inchiostro);
+  color: var(--carta);
+  padding: 0.7em 1.2em;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+
+.salta-al-contenuto:focus {
+  top: 0.5rem;
+}
+
+/* ── 8. Stampa ────────────────────────────────────────────────────────────── */
+@media print {
+  :root {
+    --carta: #fff;
+    --inchiostro: #000;
+  }
+  .testata,
+  .pie-pagina,
+  .non-stampare {
+    display: none !important;
+  }
+  body {
+    font-size: 11pt;
+  }
+  a {
+    text-decoration: none;
+  }
+}

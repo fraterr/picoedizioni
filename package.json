@@ -1,0 +1,30 @@
+{
+  "name": "pico-edizioni",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sito di Pico Edizioni — traduzioni italiane di testi di pubblico dominio",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "estrai-epub": "node scripts/estrai-epub.mjs",
+    "genera-pdf": "node scripts/genera-pdf.mjs",
+    "analizza": "node scripts/analizza-testi.mjs",
+    "ripristina-capoversi": "node scripts/ripristina-capoversi.mjs",
+    "normalizza": "node scripts/normalizza-testi.mjs",
+    "genera-copertine": "node scripts/genera-copertine.mjs",
+    "genera-epub": "node scripts/genera-epub.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource/eb-garamond": "^5.1.0",
+    "astro": "^5.1.1"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.4.0"
+  }
+}

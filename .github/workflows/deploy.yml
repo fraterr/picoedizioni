@@ -1,0 +1,56 @@
+name: Pubblica il sito
+
+# Si riparte a ogni modifica del ramo principale — sia che arrivi da un push,
+# sia che arrivi da un salvataggio nel CMS. Si può anche lanciare a mano dalla
+# scheda "Actions" del repository.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Se arrivano più modifiche ravvicinate, si pubblica solo l'ultima.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  costruisci:
+    name: Costruisci
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+
+      - name: Prepara Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installa le dipendenze
+        run: npm ci
+
+      - name: Costruisci il sito
+        run: npm run build
+
+      - name: Prepara il caricamento
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  pubblica:
+    name: Pubblica
+    needs: costruisci
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.pubblicazione.outputs.page_url }}
+    steps:
+      - name: Pubblica su GitHub Pages
+        id: pubblicazione
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,282 @@
+# ═══════════════════════════════════════════════════════════════════════════
+#  Configurazione del CMS (pagescms.org)
+#
+#  Come si usa:
+#    1. vai su https://app.pagescms.org e accedi con GitHub
+#    2. autorizza il repository di questo sito
+#    3. da lì puoi aggiungere libri, caricare copertine e file, riscrivere
+#       le pagine di testo, cambiare email e collegamenti — senza toccare
+#       il codice e senza installare niente.
+#
+#  Ogni salvataggio fa un commit su GitHub e il sito si ricostruisce da solo
+#  in un paio di minuti.
+# ═══════════════════════════════════════════════════════════════════════════
+
+media:
+  - name: copertine
+    label: Copertine
+    input: public/copertine
+    output: /copertine
+    extensions: [jpg, jpeg, png, webp]
+    rename: safe
+  - name: volumi
+    label: File dei libri
+    input: public/libri
+    output: /libri
+    extensions: [epub, pdf]
+    rename: safe
+
+content:
+  # ── I libri ──────────────────────────────────────────────────────────────
+  - name: libri
+    label: Libri
+    type: collection
+    path: src/content/libri
+    filename: '{fields.slug}.md'
+    view:
+      primary: titolo
+      fields: [titolo, autore, annoTraduzione, inEvidenza]
+      sort: [pubblicato, titolo, annoOriginale]
+      default:
+        sort: pubblicato
+        order: desc
+    fields:
+      - name: slug
+        label: Indirizzo web
+        type: string
+        required: true
+        pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+        description: >-
+          Solo minuscole, cifre e trattini, senza accenti.
+          Diventa l'indirizzo della scheda: "il-segreto-e-sentire" →
+          /catalogo/il-segreto-e-sentire/. Da non cambiare dopo la
+          pubblicazione, o i collegamenti già in giro smettono di funzionare.
+      - name: titolo
+        label: Titolo italiano
+        type: string
+        required: true
+      - name: sottotitolo
+        label: Sottotitolo
+        type: string
+        description: Lasciare vuoto se non c'è.
+      - name: autore
+        label: Autore
+        type: string
+        required: true
+      - name: titoloOriginale
+        label: Titolo originale
+        type: string
+        required: true
+        description: Come compare sul frontespizio dell'edizione inglese.
+      - name: annoOriginale
+        label: Anno dell'originale
+        type: number
+        required: true
+        options: { min: 1400, max: 2100, step: 1 }
+      - name: annoTraduzione
+        label: Anno della traduzione
+        type: number
+        required: true
+        options: { min: 1900, max: 2100, step: 1 }
+      - name: pagine
+        label: Pagine
+        type: number
+        required: true
+        description: Numero di pagine del PDF. Lo script estrai-epub ne dà una stima.
+      - name: parole
+        label: Parole
+        type: number
+        required: true
+        description: Conteggio esatto, dato dallo script estrai-epub.
+      - name: colore
+        label: Tono della copertina
+        type: select
+        options:
+          values:
+            [zabaione, sottobosco, zucca, ruggine, vinaccia, castagna, prugna, brughiera]
+          default: zabaione
+        description: >-
+          La copertina è disegnata dal sito a partire da titolo e autore:
+          qui si sceglie soltanto il colore del fondo.
+      - name: copertina
+        label: Immagine per le anteprime social
+        type: image
+        required: true
+        options: { media: copertine }
+        description: >-
+          Non compare nel sito: serve solo a Facebook, WhatsApp e simili,
+          quando si condivide il collegamento alla scheda.
+      - name: epub
+        label: File ePub
+        type: file
+        required: true
+        options: { media: volumi }
+      - name: pdf
+        label: File PDF
+        type: file
+        options: { media: volumi }
+        description: Facoltativo. Finché manca, la scheda dice «in preparazione».
+      - name: pubblicato
+        label: Data di pubblicazione
+        type: date
+        required: true
+        options: { format: 'yyyy-MM-dd' }
+      - name: inEvidenza
+        label: In evidenza sulla pagina iniziale
+        type: boolean
+      - name: indice
+        label: Indice
+        type: string
+        list: true
+        description: Una voce per capitolo, nell'ordine del libro.
+      - name: quarta
+        label: Quarta di copertina
+        type: text
+        required: true
+        options: { rows: 10 }
+      - name: body
+        label: Nota del traduttore
+        type: rich-text
+        required: true
+
+  # ── Le anteprime (generate dallo script, di norma non si toccano) ─────────
+  - name: anteprime
+    label: Anteprime
+    type: collection
+    path: src/content/anteprime
+    filename: '{fields.libro}.md'
+    view:
+      primary: libro
+      fields: [libro, parole]
+    fields:
+      - name: libro
+        label: Identificativo del libro
+        type: string
+        required: true
+        description: Deve coincidere col nome del file della scheda, senza «.md».
+      - name: parole
+        label: Parole dell'anteprima
+        type: number
+        required: true
+      - name: body
+        label: Testo dell'anteprima
+        type: rich-text
+        required: true
+
+  # ── Le pagine di testo ───────────────────────────────────────────────────
+  - name: pagine
+    label: Pagine
+    type: collection
+    path: src/content/pagine
+    filename: '{fields.slug}.md'
+    view:
+      primary: titolo
+      fields: [titolo, occhiello]
+    fields:
+      - name: slug
+        label: Indirizzo web
+        type: string
+        required: true
+        pattern: '^[a-z0-9]+(-[a-z0-9]+)*$'
+        description: 'Solo minuscole e trattini. "manifesto" → /manifesto/.'
+      - name: titolo
+        label: Titolo
+        type: string
+        required: true
+      - name: occhiello
+        label: Occhiello
+        type: string
+        description: La riga piccola sopra il titolo.
+      - name: sommario
+        label: Sommario
+        type: text
+        options: { rows: 3 }
+      - name: body
+        label: Testo
+        type: rich-text
+        required: true
+
+  # ── Impostazioni generali ────────────────────────────────────────────────
+  - name: impostazioni
+    label: Impostazioni del sito
+    type: file
+    path: src/data/sito.json
+    fields:
+      - name: nome
+        label: Nome della casa editrice
+        type: string
+        required: true
+      - name: sottotitolo
+        label: Sottotitolo
+        type: string
+      - name: motto
+        label: Motto (latino)
+        type: string
+      - name: mottoTraduzione
+        label: Traduzione del motto
+        type: string
+      - name: mottoFonte
+        label: Fonte del motto
+        type: string
+      - name: descrizione
+        label: Descrizione per i motori di ricerca
+        type: text
+        options: { rows: 3 }
+      - name: email
+        label: Indirizzo email pubblico
+        type: string
+        required: true
+      - name: collegamenti
+        label: Collegamenti
+        type: object
+        fields:
+          - name: reddit
+            label: Reddit
+            type: string
+          - name: tumblr
+            label: Tumblr
+            type: string
+          - name: sostieni
+            label: Buy Me a Coffee
+            type: string
+            description: Indirizzo completo. Vuoto = il collegamento non compare.
+      - name: newsletter
+        label: Newsletter
+        type: object
+        fields:
+          - name: attiva
+            label: Mostra il modulo di iscrizione
+            type: boolean
+          - name: azione
+            label: Indirizzo del modulo
+            type: string
+            description: 'Buttondown: https://buttondown.com/api/emails/embed-subscribe/NOME'
+          - name: testo
+            label: Testo di invito
+            type: text
+            options: { rows: 2 }
+      - name: statistiche
+        label: Statistiche di visita
+        type: object
+        fields:
+          - name: attive
+            label: Attiva le statistiche
+            type: boolean
+          - name: codiceGoatCounter
+            label: Codice GoatCounter
+            type: string
+            description: Solo il nome scelto, non l'indirizzo completo.
+      - name: licenza
+        label: Licenza delle traduzioni
+        type: object
+        fields:
+          - name: nome
+            label: Nome
+            type: string
+          - name: url
+            label: Indirizzo
+            type: string
+
+settings:
+  content:
+    merge: true

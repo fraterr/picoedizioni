@@ -1,0 +1,88 @@
+---
+import '@fontsource/eb-garamond/400.css';
+import '@fontsource/eb-garamond/400-italic.css';
+import '@fontsource/eb-garamond/500.css';
+import '@fontsource/eb-garamond/600.css';
+import '@fontsource/eb-garamond/600-italic.css';
+import '@fontsource-variable/inter/wght.css';
+import '../styles/globale.css';
+
+import Testata from '../components/Testata.astro';
+import PiePagina from '../components/PiePagina.astro';
+import { u } from '../lib/percorsi';
+import sito from '../data/sito.json';
+
+interface Props {
+  titolo: string;
+  descrizione?: string;
+  immagine?: string;
+  tipo?: 'website' | 'article' | 'book';
+}
+
+const {
+  titolo,
+  descrizione = sito.descrizione,
+  immagine,
+  tipo = 'website',
+} = Astro.props;
+
+const titoloCompleto = titolo === sito.nome ? `${sito.nome} — ${sito.sottotitolo}` : `${titolo} · ${sito.nome}`;
+const canonico = new URL(Astro.url.pathname, Astro.site);
+const anteprimaSocial = immagine ? new URL(u(immagine), Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titoloCompleto}</title>
+    <meta name="description" content={descrizione} />
+    <link rel="canonical" href={canonico} />
+    <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    <link rel="sitemap" href={u('/sitemap-index.xml')} />
+    <meta name="theme-color" content="#fbf8f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#14120e" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:site_name" content={sito.nome} />
+    <meta property="og:type" content={tipo} />
+    <meta property="og:title" content={titolo} />
+    <meta property="og:description" content={descrizione} />
+    <meta property="og:url" content={canonico} />
+    <meta property="og:locale" content="it_IT" />
+    {anteprimaSocial && <meta property="og:image" content={anteprimaSocial} />}
+    <meta name="twitter:card" content={anteprimaSocial ? 'summary_large_image' : 'summary'} />
+
+    {/* Applica il tema prima del primo disegno, per non far lampeggiare la pagina. */}
+    <script is:inline>
+      try {
+        const salvato = localStorage.getItem('tema');
+        if (salvato === 'chiaro' || salvato === 'scuro') {
+          document.documentElement.dataset.tema = salvato;
+        }
+      } catch {}
+    </script>
+
+    {
+      sito.statistiche.attive && sito.statistiche.codiceGoatCounter && (
+        <script
+          is:inline
+          data-goatcounter={`https://${sito.statistiche.codiceGoatCounter}.goatcounter.com/count`}
+          async
+          src="//gc.zgo.at/count.js"
+        />
+      )
+    }
+
+    <slot name="testa" />
+  </head>
+
+  <body>
+    <a class="salta-al-contenuto" href="#contenuto">Salta al contenuto</a>
+    <Testata />
+    <main id="contenuto">
+      <slot />
+    </main>
+    <PiePagina />
+  </body>
+</html>

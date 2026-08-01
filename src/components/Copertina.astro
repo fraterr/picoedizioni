@@ -1,0 +1,59 @@
+---
+// ─────────────────────────────────────────────────────────────────────────────
+// La copertina non è un'immagine: è disegnata dai dati del libro.
+// Impianto classico della collana tascabile europea — fascia scura in testa,
+// doppio filetto, autore in capitali spaziate, titolo in corsivo, marca
+// dell'editore in basso — con la marca e il nome di Pico Edizioni.
+//
+// Il disegno vive in scripts/lib/copertina.mjs, condiviso con il generatore
+// dei PNG e con l'impaginato del PDF: si cambia in un posto solo.
+// ─────────────────────────────────────────────────────────────────────────────
+import { copertinaSvg } from '../../scripts/lib/copertina.mjs';
+
+interface Props {
+  titolo: string;
+  autore: string;
+  colore?: string;
+  class?: string;
+}
+
+const { titolo, autore, colore = 'zabaione', class: classe = '' } = Astro.props;
+
+const descrizione = `Copertina di ${titolo}, di ${autore} — Pico Edizioni`;
+
+// Il carattere arriva dalla variabile del sito, così segue il tema tipografico.
+const svg = copertinaSvg({ titolo, autore, colore, carattere: 'var(--serif)' })
+  .replace('<svg ', `<svg role="img" aria-label="${descrizione}" `)
+  .replace(/\swidth="500"\sheight="707"/, '');
+---
+
+<figure class={`copertina ${classe}`} set:html={svg} />
+
+<style>
+  .copertina {
+    margin: 0;
+    position: relative;
+    line-height: 0;
+    /* Un'ombra appena accennata: dà lo spessore del volume senza teatralità. */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 6px 18px rgba(0, 0, 0, 0.07);
+  }
+
+  .copertina :global(svg) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1.414;
+    font-family: var(--serif);
+  }
+
+  /* Sul tema scuro l'ombra sparisce e resta un filo di contorno. */
+  :global(html[data-tema='scuro']) .copertina {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(html:not([data-tema='chiaro'])) .copertina {
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09);
+    }
+  }
+</style>

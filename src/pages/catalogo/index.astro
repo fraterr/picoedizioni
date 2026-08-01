@@ -1,0 +1,182 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SchedaCatalogo from '../../components/SchedaCatalogo.astro';
+import { u } from '../../lib/percorsi';
+
+const libri = (await getCollection('libri')).sort(
+  (a, b) => b.data.pubblicato.valueOf() - a.data.pubblicato.valueOf()
+);
+
+// Il filtro per autore compare da solo quando gli autori diventano più d'uno:
+// finché il catalogo è piccolo la pagina resta pulita.
+const autori = [...new Set(libri.map((l) => l.data.autore))].sort();
+const mostraFiltri = autori.length > 1;
+---
+
+<Base
+  titolo="Catalogo"
+  descrizione="Tutte le traduzioni di Pico Edizioni, scaricabili gratuitamente in ePub e PDF."
+>
+  <div class="contenitore">
+    <header class="apertura">
+      <p class="occhiello">Catalogo</p>
+      <h1>Le traduzioni</h1>
+      <p class="sommario">
+        Ogni volume è scaricabile in ePub e in PDF, gratuitamente e senza
+        registrazione. Di ciascuno si può leggere qui un'anteprima e la nota
+        del traduttore.
+      </p>
+    </header>
+
+    {
+      mostraFiltri && (
+        <div class="filtri non-stampare">
+          <span class="occhiello">Autore</span>
+          <div class="filtri__elenco" role="group" aria-label="Filtra per autore">
+            <button type="button" class="filtro filtro--attivo" data-autore="tutti">
+              Tutti <span class="filtro__conto">{libri.length}</span>
+            </button>
+            {autori.map((autore) => (
+              <button type="button" class="filtro" data-autore={autore}>
+                {autore}
+                <span class="filtro__conto">
+                  {libri.filter((l) => l.data.autore === autore).length}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )
+    }
+
+    <div class="griglia-libri" data-griglia>
+      {
+        libri.map((libro) => (
+          <div data-autore={libro.data.autore}>
+            <SchedaCatalogo libro={libro} />
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      libri.length === 0 && (
+        <p class="vuoto tenue">Il catalogo è ancora vuoto. Torna presto.</p>
+      )
+    }
+
+    <aside class="in-lavorazione">
+      <div class="filetto-ornato" aria-hidden="true"><span>◆</span></div>
+      <p>
+        Altre traduzioni sono in corso. Per sapere quando escono, c'è
+        <a href={u('/contatti/')}>la pagina dei contatti</a>.
+      </p>
+    </aside>
+  </div>
+</Base>
+
+<script>
+  // Filtro per autore: nasconde le schede, senza ricaricare la pagina.
+  const bottoni = document.querySelectorAll<HTMLButtonElement>('.filtro');
+  const griglia = document.querySelector<HTMLElement>('[data-griglia]');
+
+  if (griglia) {
+    for (const bottone of bottoni) {
+      bottone.addEventListener('click', () => {
+        const scelto = bottone.dataset.autore;
+        bottoni.forEach((b) => b.classList.toggle('filtro--attivo', b === bottone));
+        for (const voce of griglia.children) {
+          const suo = (voce as HTMLElement).dataset.autore;
+          (voce as HTMLElement).hidden = scelto !== 'tutti' && suo !== scelto;
+        }
+      });
+    }
+  }
+</script>
+
+<style>
+  .apertura {
+    max-width: 40rem;
+    padding-block: clamp(3rem, 8vw, 5rem) clamp(2rem, 5vw, 3rem);
+  }
+
+  .apertura .occhiello {
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+
+  .apertura .sommario {
+    margin-top: 1.25rem;
+  }
+
+  .filtri {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--filo);
+  }
+
+  .filtri__elenco {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filtro {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    padding: 0.45em 0.9em;
+    border: 1px solid var(--filo);
+    background: transparent;
+    color: var(--inchiostro-tenue);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+  }
+
+  .filtro:hover {
+    border-color: var(--zabaione-vivo);
+    color: var(--inchiostro);
+  }
+
+  .filtro--attivo {
+    background: var(--inchiostro);
+    border-color: var(--inchiostro);
+    color: var(--carta);
+  }
+
+  .filtro__conto {
+    font-size: 0.7em;
+    opacity: 0.65;
+  }
+
+  .griglia-libri {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: clamp(2.5rem, 6vw, 4rem) clamp(1.5rem, 4vw, 3rem);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+
+  .vuoto {
+    padding-block: 4rem;
+    text-align: center;
+  }
+
+  .in-lavorazione {
+    max-width: 34rem;
+    margin-inline: auto;
+    text-align: center;
+    color: var(--inchiostro-tenue);
+    padding-bottom: clamp(3rem, 8vw, 6rem);
+  }
+
+  .in-lavorazione p {
+    margin-top: 2rem;
+  }
+</style>

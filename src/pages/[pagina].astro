@@ -1,0 +1,66 @@
+---
+// Rende le pagine di testo della raccolta "pagine": manifesto, privacy,
+// pubblico dominio. Aggiungendo un file .md nella cartella (anche dal CMS)
+// nasce da sé una nuova pagina all'indirizzo corrispondente.
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const pagine = await getCollection('pagine');
+  return pagine.map((pagina) => ({ params: { pagina: pagina.slug }, props: { pagina } }));
+}
+
+interface Props {
+  pagina: CollectionEntry<'pagine'>;
+}
+
+const { pagina } = Astro.props;
+const { Content } = await pagina.render();
+const d = pagina.data;
+---
+
+<Base titolo={d.titolo} descrizione={d.sommario || undefined}>
+  <div class="contenitore">
+    <article class="pagina">
+      <header class="pagina__apertura">
+        {d.occhiello && <p class="occhiello">{d.occhiello}</p>}
+        <h1>{d.titolo}</h1>
+        {d.sommario && <p class="sommario">{d.sommario}</p>}
+        <div class="filetto-ornato" aria-hidden="true"><span>◆</span></div>
+      </header>
+
+      <div class="prosa pagina__testo">
+        <Content />
+      </div>
+    </article>
+  </div>
+</Base>
+
+<style>
+  .pagina {
+    max-width: 38rem;
+    margin-inline: auto;
+    padding-block: clamp(3rem, 8vw, 5rem) clamp(3.5rem, 9vw, 6rem);
+  }
+
+  .pagina__apertura .occhiello {
+    display: block;
+    margin-bottom: 0.9rem;
+  }
+
+  .pagina__apertura .sommario {
+    margin-top: 1.25rem;
+  }
+
+  .pagina__apertura .filetto-ornato {
+    margin-block: 2.75rem;
+  }
+
+  /* I titoli di sezione hanno un piccolo occhiello numerato a sinistra */
+  .pagina__testo :global(h2) {
+    font-size: clamp(1.3rem, 1.15rem + 0.7vw, 1.65rem);
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--filo);
+  }
+</style>

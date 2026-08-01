@@ -1,0 +1,150 @@
+---
+import Marca from './Marca.astro';
+import InterruttoreTema from './InterruttoreTema.astro';
+import { u } from '../lib/percorsi';
+import sito from '../data/sito.json';
+
+// Il menu resta di tre voci qualunque sia il numero di libri: i titoli
+// vivono nel catalogo, mai nella barra di navigazione.
+const voci = [
+  { testo: 'Manifesto', href: u('/manifesto/') },
+  { testo: 'Catalogo', href: u('/catalogo/') },
+  { testo: 'Contatti', href: u('/contatti/') },
+];
+
+const percorso = Astro.url.pathname.replace(/\/+$/, '') + '/';
+const attiva = (href: string) => percorso.startsWith(href);
+---
+
+<header class="testata">
+  <div class="contenitore testata__interno">
+    <a class="insegna" href={u('/')} aria-label={`${sito.nome} — pagina iniziale`}>
+      <Marca dimensione={34} titolo={sito.nome} />
+      <span class="insegna__testo">
+        <span class="insegna__nome">Pico Edizioni</span>
+        <span class="insegna__motto">{sito.motto}</span>
+      </span>
+    </a>
+
+    <nav class="navigazione" aria-label="Principale">
+      <ul>
+        {
+          voci.map((voce) => (
+            <li>
+              <a href={voce.href} aria-current={attiva(voce.href) ? 'page' : undefined}>
+                {voce.testo}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <InterruttoreTema />
+    </nav>
+  </div>
+</header>
+
+<style>
+  .testata {
+    border-bottom: 1px solid var(--filo);
+    background: var(--carta);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .testata__interno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4.5rem;
+    flex-wrap: wrap;
+    padding-block: 0.7rem;
+  }
+
+  .insegna {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: var(--inchiostro);
+  }
+
+  .insegna:hover {
+    color: var(--inchiostro);
+  }
+
+  .insegna:hover :global(.marca) {
+    color: var(--bruno);
+  }
+
+  .insegna__testo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    line-height: 1.1;
+  }
+
+  .insegna__nome {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+  }
+
+  .insegna__motto {
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--inchiostro-lieve);
+  }
+
+  .navigazione {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .navigazione ul {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navigazione a {
+    font-family: var(--sans);
+    font-size: 0.775rem;
+    font-weight: 500;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--inchiostro-tenue);
+    padding-block: 0.35rem;
+    border-bottom: 1px solid transparent;
+  }
+
+  .navigazione a:hover {
+    color: var(--inchiostro);
+  }
+
+  .navigazione a[aria-current='page'] {
+    color: var(--inchiostro);
+    border-bottom-color: var(--zabaione-vivo);
+  }
+
+  @media (max-width: 34rem) {
+    .testata {
+      position: static;
+    }
+    .testata__interno {
+      justify-content: center;
+      text-align: center;
+    }
+    .insegna__motto {
+      display: none;
+    }
+  }
+</style>

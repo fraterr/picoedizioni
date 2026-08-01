@@ -1,0 +1,152 @@
+---
+import Marca from './Marca.astro';
+import Email from './Email.astro';
+import { u } from '../lib/percorsi';
+import sito from '../data/sito.json';
+
+const anno = new Date().getFullYear();
+const { collegamenti } = sito;
+---
+
+<footer class="pie-pagina">
+  <div class="contenitore">
+    <div class="pie-pagina__griglia">
+      <div class="pie-pagina__marca">
+        <Marca dimensione={52} titolo={sito.nome} />
+        <p class="motto">
+          <em>{sito.motto}</em>
+          <span class="motto__glossa">{sito.mottoTraduzione}</span>
+          <span class="motto__fonte">{sito.mottoFonte}</span>
+        </p>
+      </div>
+
+      <nav class="pie-pagina__colonna" aria-label="Sezioni">
+        <h2 class="occhiello">Il sito</h2>
+        <ul>
+          <li><a href={u('/manifesto/')}>Manifesto</a></li>
+          <li><a href={u('/catalogo/')}>Catalogo</a></li>
+          <li><a href={u('/contatti/')}>Contatti</a></li>
+        </ul>
+      </nav>
+
+      <nav class="pie-pagina__colonna" aria-label="Altrove">
+        <h2 class="occhiello">Altrove</h2>
+        <ul>
+          {collegamenti.reddit && <li><a href={collegamenti.reddit} rel="me noopener">Reddit</a></li>}
+          {collegamenti.tumblr && <li><a href={collegamenti.tumblr} rel="me noopener">Tumblr</a></li>}
+          {collegamenti.sostieni && <li><a href={collegamenti.sostieni} rel="noopener">Offri un caffè</a></li>}
+          <li><Email etichetta="Scrivimi" /></li>
+        </ul>
+      </nav>
+
+      <nav class="pie-pagina__colonna" aria-label="Note legali">
+        <h2 class="occhiello">Note</h2>
+        <ul>
+          <li><a href={u('/pubblico-dominio/')}>Pubblico dominio</a></li>
+          <li><a href={u('/privacy/')}>Privacy</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <hr class="filetto" />
+
+    <div class="pie-pagina__coda">
+      <p>
+        Testi originali di pubblico dominio. Traduzioni {anno > 2022 ? `2022–${anno}` : '2022'}
+        Pico Edizioni, sotto licenza
+        <a href={sito.licenza.url} rel="license noopener">{sito.licenza.nome}</a>.
+      </p>
+      <p class="tenue">Casa editrice senza scopo di lucro. Nessun libro è in vendita.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie-pagina {
+    margin-top: auto;
+    border-top: 1px solid var(--filo);
+    background: var(--carta-alt);
+    padding-block: clamp(2.5rem, 6vw, 4rem) 2rem;
+    font-size: 0.95rem;
+  }
+
+  .pie-pagina__griglia {
+    display: grid;
+    grid-template-columns: minmax(14rem, 2fr) repeat(3, minmax(7rem, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    padding-bottom: 2.5rem;
+  }
+
+  .pie-pagina__marca {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--inchiostro-tenue);
+  }
+
+  .motto {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    line-height: 1.4;
+  }
+
+  .motto em {
+    color: var(--inchiostro);
+    font-size: 1.05rem;
+  }
+
+  .motto__glossa {
+    color: var(--inchiostro-tenue);
+  }
+
+  .motto__fonte {
+    font-size: 0.8rem;
+    color: var(--inchiostro-lieve);
+    margin-top: 0.35rem;
+  }
+
+  .pie-pagina__colonna h2 {
+    margin-bottom: 0.9rem;
+  }
+
+  .pie-pagina__colonna ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .pie-pagina__colonna a {
+    text-decoration: none;
+    color: var(--inchiostro-tenue);
+  }
+
+  .pie-pagina__colonna a:hover {
+    color: var(--inchiostro);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+
+  .pie-pagina__coda {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-top: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--inchiostro-tenue);
+  }
+
+  @media (max-width: 46rem) {
+    .pie-pagina__griglia {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .pie-pagina__marca {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

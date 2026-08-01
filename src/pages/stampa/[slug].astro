@@ -1,0 +1,332 @@
+---
+// ─────────────────────────────────────────────────────────────────────────────
+// L'IMPAGINATO PER LA STAMPA
+//
+// Non è una pagina del sito: è il libro impaginato, che Chrome trasforma in
+// PDF (scripts/genera-pdf.mjs). Niente testata, niente piè di pagina, niente
+// navigazione — solo il volume.
+//
+// Per guardarlo mentre lo si mette a punto:
+//   npm run dev  →  http://localhost:4321/pico-edizioni/stampa/liberta-per-tutti/
+// e poi Ctrl+P per vedere l'anteprima di stampa.
+// ─────────────────────────────────────────────────────────────────────────────
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import '@fontsource/eb-garamond/400.css';
+import '@fontsource/eb-garamond/400-italic.css';
+import '@fontsource/eb-garamond/500.css';
+import '@fontsource/eb-garamond/600.css';
+import '@fontsource/eb-garamond/600-italic.css';
+import sito from '../../data/sito.json';
+
+export async function getStaticPaths() {
+  const libri = await getCollection('libri');
+  const testi = await getCollection('testi');
+
+  return libri.flatMap((libro) => {
+    const testo = testi.find((t) => t.data.libro === libro.slug);
+    return testo ? [{ params: { slug: libro.slug }, props: { libro, testo } }] : [];
+  });
+}
+
+interface Props {
+  libro: CollectionEntry<'libri'>;
+  testo: CollectionEntry<'testi'>;
+}
+
+const { libro, testo } = Astro.props;
+const d = libro.data;
+const { Content } = await testo.render();
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title>{d.titolo} — {d.autore} — Pico Edizioni</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="author" content={d.autore} />
+  </head>
+
+  <body>
+    <!-- Frontespizio -->
+    <section class="frontespizio">
+      <p class="frontespizio__autore">{d.autore}</p>
+      <h1 class="frontespizio__titolo">{d.titolo}</h1>
+      {d.sottotitolo && <p class="frontespizio__sottotitolo">{d.sottotitolo}</p>}
+
+      <div class="frontespizio__marca">
+        <svg viewBox="0 0 100 100" fill="none" width="64" height="64">
+          <circle cx="50" cy="50" r="46.2" stroke="currentColor" stroke-width="1.6"></circle>
+          <circle cx="50" cy="50" r="41.4" stroke="currentColor" stroke-width="0.7" opacity="0.55"
+          ></circle>
+          <path
+            fill="currentColor"
+            fill-rule="evenodd"
+            d="M40 28 L58 28 C68.5 28 73 32.5 73 40 C73 47.5 68.5 52 58 52 L46 52 L46 69 L55 69 L55 72 L31 72 L31 69 L40 69 Z
+               M46 33.5 L57.5 33.5 C62.5 33.5 66 35.8 66 40 C66 44.2 62.5 46.5 57.5 46.5 L46 46.5 Z"
+          ></path>
+          <path d="M50 78.5 L52 81 L50 83.5 L48 81 Z" fill="currentColor" opacity="0.75"></path>
+        </svg>
+        <p class="frontespizio__editore">Pico Edizioni</p>
+      </div>
+    </section>
+
+    <!-- Colophon -->
+    <section class="colophon">
+      <div class="colophon__blocco">
+        <p>
+          Titolo originale: <em>{d.titoloOriginale}</em><br />
+          Prima edizione {d.annoOriginale}. Opera di pubblico dominio.
+        </p>
+        <p>
+          Traduzione italiana di Pico Edizioni, {d.annoTraduzione}.<br />
+          Edizione digitale composta in EB Garamond.
+        </p>
+        <p>
+          Questa traduzione è frutto di un lavoro volontario e non è in vendita.
+          È distribuita sotto licenza {sito.licenza.nome}: siete liberi di
+          scaricarla, stamparla e ridistribuirla gratuitamente, citando la
+          fonte; non potete venderla né pubblicarne versioni modificate.
+        </p>
+        <p class="colophon__motto">
+          <em>{sito.motto}</em><br />
+          <span>{sito.mottoFonte}</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- Indice -->
+    {
+      d.indice.length > 0 && (
+        <section class="indice">
+          <h2 class="indice__titolo">Indice</h2>
+          <ul>
+            {d.indice.map((voce) => (
+              <li>{voce}</li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <!-- Il testo -->
+    <main class="testo">
+      <Content />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  /* ── Il formato del volume: A5, margini da libro ──────────────────────── */
+  @page {
+    size: 148mm 210mm;
+    margin: 19mm 17mm 20mm;
+  }
+
+  :root {
+    --serif: 'EB Garamond', Garamond, Georgia, serif;
+    --inchiostro: #16140f;
+    --tenue: #55503f;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  body {
+    font-family: var(--serif);
+    font-size: 10.8pt;
+    line-height: 1.52;
+    color: var(--inchiostro);
+    background: #fff;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'onum' 1;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  /* ── Frontespizio ─────────────────────────────────────────────────────── */
+  .frontespizio {
+    break-after: page;
+    height: 171mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 34mm;
+  }
+
+  .frontespizio__autore {
+    font-size: 13pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-indent: 0.22em;
+  }
+
+  .frontespizio__titolo {
+    font-size: 26pt;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.2;
+    margin-top: 14mm;
+  }
+
+  .frontespizio__sottotitolo {
+    font-size: 13pt;
+    color: var(--tenue);
+    margin-top: 6mm;
+  }
+
+  .frontespizio__marca {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5mm;
+  }
+
+  .frontespizio__editore {
+    font-size: 10pt;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-indent: 0.28em;
+  }
+
+  /* ── Colophon ─────────────────────────────────────────────────────────── */
+  .colophon {
+    break-after: page;
+    height: 171mm;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .colophon__blocco {
+    font-size: 8.6pt;
+    line-height: 1.5;
+    color: var(--tenue);
+  }
+
+  .colophon__blocco p + p {
+    margin-top: 4mm;
+  }
+
+  .colophon__motto {
+    margin-top: 8mm !important;
+    padding-top: 4mm;
+    border-top: 0.5pt solid #c9c2ae;
+  }
+
+  .colophon__motto span {
+    font-size: 7.6pt;
+  }
+
+  /* ── Indice ───────────────────────────────────────────────────────────── */
+  .indice {
+    break-after: page;
+  }
+
+  .indice__titolo {
+    font-size: 14pt;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    text-indent: 0.18em;
+    margin-bottom: 12mm;
+  }
+
+  .indice ul {
+    list-style: none;
+    padding: 0;
+    max-width: 88mm;
+    margin-inline: auto;
+  }
+
+  .indice li {
+    padding-block: 2.2mm;
+    border-bottom: 0.4pt solid #ddd7c6;
+    font-size: 10pt;
+    text-align: center;
+    hyphens: none;
+  }
+
+  /* ── Il testo ─────────────────────────────────────────────────────────── */
+  .testo h2 {
+    break-before: page;
+    break-after: avoid;
+    font-size: 14pt;
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.3;
+    hyphens: none;
+    padding-top: 12mm;
+    margin-bottom: 9mm;
+  }
+
+  /* Il primo capitolo non deve saltare una pagina: l'indice l'ha già fatto. */
+  .testo h2:first-child {
+    break-before: auto;
+    padding-top: 0;
+  }
+
+  .testo h2::after {
+    content: '';
+    display: block;
+    width: 14mm;
+    height: 0.6pt;
+    background: var(--inchiostro);
+    margin: 4mm auto 0;
+  }
+
+  .testo p {
+    text-align: justify;
+    text-indent: 1.3em;
+    orphans: 2;
+    widows: 2;
+  }
+
+  /* Il primo capoverso dopo un titolo non rientra: è la regola del libro. */
+  .testo h2 + p,
+  .testo blockquote + p {
+    text-indent: 0;
+  }
+
+  .testo blockquote {
+    margin: 5mm 8mm;
+    font-style: italic;
+    color: var(--tenue);
+  }
+
+  .testo blockquote p {
+    text-indent: 0;
+    text-align: left;
+  }
+
+  .testo em,
+  .testo i {
+    font-style: italic;
+  }
+
+  /* A schermo si simula il foglio, per potersi rendere conto di com'è. */
+  @media screen {
+    body {
+      background: #6d685c;
+      padding: 12mm 0;
+    }
+    .frontespizio,
+    .colophon,
+    .indice,
+    .testo {
+      background: #fff;
+      width: 148mm;
+      margin: 0 auto 6mm;
+      padding: 19mm 17mm 20mm;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+    .frontespizio,
+    .colophon {
+      height: 210mm;
+    }
+  }
+</style>

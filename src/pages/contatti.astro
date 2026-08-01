@@ -10,7 +10,7 @@ const { collegamenti } = sito;
 
 <Base
   titolo="Contatti"
-  descrizione="Come scrivere a Pico Edizioni: email, Reddit, Tumblr. E come sostenere il lavoro di traduzione."
+  descrizione="Come scrivere a Pico Edizioni: email e Reddit. E come sostenere il lavoro di traduzione."
 >
   <div class="contenitore">
     <article class="pagina">
@@ -45,18 +45,6 @@ const { collegamenti } = sito;
               <p class="tenue">
                 Dove annuncio le nuove traduzioni e dove si discute dei testi.
               </p>
-            </section>
-          )
-        }
-
-        {
-          collegamenti.tumblr && (
-            <section class="via">
-              <h2 class="occhiello">Su Tumblr</h2>
-              <p class="via__principale">
-                <a href={collegamenti.tumblr} rel="me noopener">pico-edizioni</a>
-              </p>
-              <p class="tenue">Estratti, appunti di lavorazione, citazioni.</p>
             </section>
           )
         }

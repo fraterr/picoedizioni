@@ -233,9 +233,6 @@ content:
           - name: reddit
             label: Reddit
             type: string
-          - name: tumblr
-            label: Tumblr
-            type: string
           - name: sostieni
             label: Collegamento per le donazioni
             type: string

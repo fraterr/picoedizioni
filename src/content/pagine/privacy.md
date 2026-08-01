@@ -41,7 +41,7 @@ messaggio contiene un collegamento per cancellarsi che funziona al primo clic.
 
 ## Collegamenti esterni
 
-Le pagine di Reddit, Tumblr e del servizio per le donazioni sono siti di terzi,
+Le pagine di Reddit e del servizio per le donazioni sono siti di terzi,
 con politiche proprie sulle quali non ho alcun controllo. Finché restate su
 queste pagine, però, nulla di quei siti viene caricato qui.
 

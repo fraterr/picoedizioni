@@ -5,11 +5,12 @@
   "mottoTraduzione": "Plasmatore e scultore di te stesso",
   "mottoFonte": "Giovanni Pico della Mirandola, Oratio de hominis dignitate, 1486",
   "descrizione": "Pico Edizioni traduce in italiano, con rigore filologico, testi di pubblico dominio di New Thought, filosofia e tradizione esoterica. Tutti i libri sono scaricabili gratuitamente in ePub e PDF.",
-  "email": "DA-CONFIGURARE@example.com",
+  "email": "pico@picoedizioni.anonaddy.me",
   "collegamenti": {
     "reddit": "https://old.reddit.com/r/Pico_Edizioni/",
     "tumblr": "https://www.tumblr.com/blog/pico-edizioni",
-    "sostieni": ""
+    "sostieni": "https://buymeacoffee.com/practicalhumanism",
+    "sostieniEtichetta": "Buy me a tea"
   },
   "newsletter": {
     "attiva": false,

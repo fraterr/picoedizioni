@@ -64,9 +64,11 @@ const { collegamenti } = sito;
         {
           collegamenti.sostieni && (
             <section class="via via--sostieni">
-              <h2 class="occhiello">Offrire un caffè</h2>
+              <h2 class="occhiello">Offrire qualcosa</h2>
               <p class="via__principale">
-                <a href={collegamenti.sostieni} rel="noopener">Buy me a coffee</a>
+                <a href={collegamenti.sostieni} rel="noopener">
+                  {collegamenti.sostieniEtichetta || 'Offri qualcosa'}
+                </a>
               </p>
               <p class="tenue">
                 Del tutto facoltativo. I libri restano gratuiti in ogni caso, e

@@ -237,9 +237,13 @@ content:
             label: Tumblr
             type: string
           - name: sostieni
-            label: Buy Me a Coffee
+            label: Collegamento per le donazioni
             type: string
-            description: Indirizzo completo. Vuoto = il collegamento non compare.
+            description: Indirizzo completo. Vuoto = il collegamento sparisce da tutto il sito.
+          - name: sostieniEtichetta
+            label: Dicitura per le donazioni
+            type: string
+            description: Come compare nel menu e nel piè di pagina. Per esempio «Buy me a tea».
       - name: newsletter
         label: Newsletter
         type: object

@@ -68,5 +68,5 @@ società, non ha partita IVA, non vende nulla e non riceve denaro dalla
 distribuzione dei suoi libri: è il nome che do a un lavoro fatto per il gusto di
 farlo bene.
 
-Chi vuole può [offrire un caffè](/contatti/). Chi non vuole scarica lo stesso
+Chi vuole può [offrire un tè](/contatti/). Chi non vuole scarica lo stesso
 tutto.

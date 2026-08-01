@@ -38,6 +38,20 @@ const attiva = (href: string) => percorso.startsWith(href);
           ))
         }
       </ul>
+
+      {
+        sito.collegamenti.sostieni && (
+          <a class="sostieni" href={sito.collegamenti.sostieni} rel="noopener" target="_blank">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z" />
+              <path d="M17 10.5h1.6a2.4 2.4 0 0 1 0 4.8H17" />
+              <path d="M8 5.4c0-.7.6-1 .6-1.7M11.5 5.4c0-.7.6-1 .6-1.7M15 5.4c0-.7.6-1 .6-1.7" />
+            </svg>
+            {sito.collegamenti.sostieniEtichetta || 'Offri qualcosa'}
+          </a>
+        )
+      }
+
       <InterruttoreTema />
     </nav>
   </div>
@@ -135,6 +149,43 @@ const attiva = (href: string) => percorso.startsWith(href);
     border-bottom-color: var(--zabaione-vivo);
   }
 
+  /* Il collegamento per le donazioni non è una voce di menu come le altre:
+     ha il fondo zabaione, così si vede senza gridare. */
+  .sostieni {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--inchiostro);
+    background: var(--zabaione-fondo);
+    border: 1px solid var(--zabaione-vivo);
+    padding: 0.5em 0.9em;
+    line-height: 1;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
+  .sostieni:hover {
+    background: var(--zabaione-vivo);
+    color: #1c1a16;
+  }
+
+  .sostieni svg {
+    width: 1.15em;
+    height: 1.15em;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
   @media (max-width: 34rem) {
     .testata {
       position: static;
@@ -145,6 +196,25 @@ const attiva = (href: string) => percorso.startsWith(href);
     }
     .insegna__motto {
       display: none;
+    }
+    /* Sul telefono il menu va a capo sotto l'insegna, centrato, invece di
+       uscire dallo schermo. */
+    .navigazione {
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 0.9rem;
+    }
+    .navigazione ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.1rem;
+    }
+    /* La voce resta, ma più raccolta. */
+    .sostieni {
+      margin-left: 0;
+      font-size: 0.7rem;
+      padding: 0.45em 0.7em;
     }
   }
 </style>

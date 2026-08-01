@@ -34,7 +34,15 @@ const { collegamenti } = sito;
         <ul>
           {collegamenti.reddit && <li><a href={collegamenti.reddit} rel="me noopener">Reddit</a></li>}
           {collegamenti.tumblr && <li><a href={collegamenti.tumblr} rel="me noopener">Tumblr</a></li>}
-          {collegamenti.sostieni && <li><a href={collegamenti.sostieni} rel="noopener">Offri un caffè</a></li>}
+          {
+            collegamenti.sostieni && (
+              <li>
+                <a href={collegamenti.sostieni} rel="noopener">
+                  {collegamenti.sostieniEtichetta || 'Offri qualcosa'}
+                </a>
+              </li>
+            )
+          }
           <li><Email etichetta="Scrivimi" /></li>
         </ul>
       </nav>

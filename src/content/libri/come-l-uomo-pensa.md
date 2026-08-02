@@ -7,7 +7,7 @@ titoloOriginale: "As a Man Thinketh"
 annoOriginale: 1903
 annoTraduzione: 2026
 pagine: 30
-parole: 7461
+parole: 7451
 copertina: /copertine/come-l-uomo-pensa.png
 colore: brughiera
 epub: /libri/come-l-uomo-pensa.epub

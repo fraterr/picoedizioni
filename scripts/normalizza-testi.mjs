@@ -128,8 +128,9 @@ function normalizzaCorpo(testo) {
   //    e troncamento (un po’). Il glifo è lo stesso in entrambi i casi.
   t = t.replace(/(?<=[A-Za-zÀ-ÿ])'/g, '’');
 
-  // 6. lineette
-  t = t.replace(/\s+[-–—]{1,2}\s+/g, ' – ');
+  // 6. lineette. Solo spazi e tabulazioni ai lati: con \s si mangerebbero gli
+  //    a capo, e a ogni esecuzione le righe si salderebbero fra loro.
+  t = t.replace(/[ \t]+[-–—]{1,2}[ \t]+/g, ' – ');
 
   // 7. spaziature
   t = t.replace(/[ \t]+([,.;:!?])/g, '$1');

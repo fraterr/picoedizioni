@@ -1,6 +1,6 @@
 ---
 libro: come-l-uomo-pensa
-parole: 7461
+parole: 7451
 ---
 
 ## Prefazione
@@ -10,7 +10,7 @@ un trattato esauriente sul tema, già tanto scritto, del potere del pensiero.
 Suggerisce più che spiegare, e il suo scopo è stimolare uomini e donne alla
 scoperta e alla percezione della verità che
 
-> essi sono i fabbri di sé stessi
+> essi sono gli artefici di sé stessi
 
 in virtù dei pensieri che scelgono e assecondano; che la mente è la tessitrice
 maestra tanto della veste interiore del carattere quanto della veste esteriore
@@ -46,7 +46,7 @@ l’effetto sono assoluti e senza deviazione nel regno nascosto del pensiero non
 meno che nel mondo delle cose visibili e materiali. Un carattere nobile e simile
 a Dio non è cosa di favore o di caso, ma il risultato naturale di uno sforzo
 continuato nel pensare rettamente, l’effetto di una lunga e amata frequentazione
-di pensieri divini. Un carattere ignobile e bestiale, per lo stesso processo, è
+di pensieri simili a Dio. Un carattere ignobile e bestiale, per lo stesso processo, è
 il risultato dell’aver dato ricetto di continuo a pensieri striscianti.
 
 L’uomo è fatto o disfatto da sé stesso; nell’armeria del pensiero egli forgia le
@@ -58,16 +58,16 @@ della bestia. Fra questi due estremi stanno tutti i gradi del carattere, e
 l’uomo ne è l’artefice e il padrone.
 
 Fra tutte le belle verità riguardanti l’anima che sono state restituite e
-riportate alla luce in questa età, nessuna è più lieta, né più feconda di divina
+riportate alla luce in quest’epoca, nessuna è più lieta, né più feconda di divina
 promessa e di fiducia, di questa: che l’uomo è il padrone del pensiero, il
 modellatore del carattere, l’artefice e il plasmatore della condizione,
 dell’ambiente e del destino.
 
 In quanto essere di Potenza, di Intelligenza e di Amore, e signore dei propri
-pensieri, l’uomo tiene la chiave di ogni situazione, e contiene in sé quell’agente
+pensieri, l’uomo tiene la chiave di ogni situazione, e contiene in sé quel potere
 trasformatore e rigeneratore per mezzo del quale può fare di sé ciò che vuole.
 
-L’uomo è sempre il padrone, anche nel suo stato più debole e più abbandonato; ma
+L’uomo è sempre il padrone, anche nel suo stato più debole e più dissoluto; ma
 nella sua debolezza e nella sua degradazione è il padrone stolto che governa
 male la propria casa. Quando comincia a riflettere sulla propria condizione e a
 cercare con diligenza la Legge su cui il suo essere è fondato, allora diventa il
@@ -83,8 +83,8 @@ carattere, il modellatore della propria vita e il costruttore del proprio
 destino, potrà provarlo senza errore se vorrà osservare, controllare e mutare i
 propri pensieri, seguendone gli effetti su di sé, sugli altri, sulla propria
 vita e sulle proprie circostanze, collegando causa ed effetto con paziente
-pratica e indagine, e adoperando ogni esperienza, fin la più banale occorrenza
-quotidiana, come mezzo per ottenere quella conoscenza di sé che è Comprensione,
+pratica e indagine, e adoperando ogni esperienza, perfino il più banale accadimento
+quotidiano, come mezzo per ottenere quella conoscenza di sé che è Comprensione,
 Saggezza, Potenza. In questa direzione, come in nessun’altra, vale in modo
 assoluto la legge per cui «chi cerca trova, e a chi bussa sarà aperto»: perché
 solo con la pazienza, la pratica e l’insistenza incessante un uomo può varcare
@@ -104,7 +104,7 @@ può curare il giardino della propria mente, estirpando tutti i pensieri
 sbagliati, inutili e impuri, e coltivando verso la perfezione i fiori e i frutti
 dei pensieri retti, utili e puri. Seguendo questo processo, prima o poi l’uomo
 scopre di essere il giardiniere capo della propria anima, il direttore della
-propria vita. Scopre inoltre, dentro di sé, le leggi del pensiero, e comprende
+propria vita. Porta inoltre alla luce, dentro di sé, le leggi del pensiero, e comprende
 con precisione sempre maggiore come le forze del pensiero e gli elementi della
 mente operino nel plasmare il suo carattere, le sue circostanze e il suo
 destino. Pensiero e carattere sono una cosa sola; e poiché il carattere può
@@ -121,7 +121,7 @@ non c’è elemento di caso, ma tutto è il risultato di una legge che non può
 errare. Questo è vero per chi si sente «in disaccordo» con ciò che lo circonda
 esattamente quanto per chi ne è contento.
 
-In quanto essere progressivo ed evolvente, l’uomo è dov’è perché possa imparare
+In quanto essere che progredisce e si evolve, l’uomo è dov’è perché possa imparare
 e possa crescere; e quando ha imparato la lezione spirituale che una data
 circostanza racchiude per lui, quella circostanza passa e lascia il posto ad
 altre.
@@ -150,7 +150,7 @@ cattivi frutti cattivi.
 Il mondo esteriore delle circostanze si modella sul mondo interiore del
 pensiero, e le condizioni esterne, tanto piacevoli quanto spiacevoli, sono
 fattori che concorrono al bene ultimo dell’individuo. In quanto mietitore del
-proprio raccolto, l’uomo impara tanto dalla sofferenza quanto dalla beatitudine.
+proprio raccolto, l’uomo impara tanto dalla sofferenza quanto dalla letizia.
 
 Seguendo i desideri, le aspirazioni e i pensieri più intimi dai quali si lascia
 dominare – inseguendo il fuoco fatuo di un’immaginazione impura, oppure
@@ -160,7 +160,7 @@ della propria vita.
 
 Le leggi della crescita e dell’aggiustamento valgono dappertutto.
 
-Un uomo non finisce all’ospizio o in carcere per la tirannia del fato o delle
+Un uomo non finisce all’ospizio dei poveri o in carcere per la tirannia del fato o delle
 circostanze, ma per il sentiero dei pensieri striscianti e dei desideri vili. Né
 un uomo di mente pura cade d’un tratto nel delitto per la pressione di una mera
 forza esterna: il pensiero criminale era stato a lungo nutrito in segreto nel
@@ -180,7 +180,7 @@ Gli uomini non attirano ciò che vogliono, ma ciò che sono. I loro capricci, le
 loro fantasie e le loro ambizioni sono contrastati a ogni passo, ma i loro
 pensieri e desideri più intimi sono nutriti col cibo che è loro proprio, sia
 esso lercio o pulito. La «divinità che dà forma ai nostri fini» è in noi stessi:
-è il nostro Sé stesso. L’uomo è incatenato soltanto da sé. Il pensiero e
+è il nostro stesso Sé. L’uomo è incatenato soltanto da sé. Il pensiero e
 l’azione sono i carcerieri del Fato – imprigionano, quando sono vili; e sono
 anche gli angeli della Libertà – liberano, quando sono nobili.
 
@@ -203,7 +203,7 @@ davanti alla crocifissione di sé non può mai fallire nel conseguire l’oggett
 cui ha posto il cuore. Questo vale per le cose terrene non meno che per quelle
 celesti. Perfino l’uomo il cui unico scopo è acquistare ricchezza deve essere
 pronto a grandi sacrifici personali prima di poter conseguire il proprio scopo:
-quanto più, allora, colui che voglia realizzare una vita forte e bene equilibrata?
+quanto più, allora, colui che voglia realizzare una vita forte e ben equilibrata?
 
 Ecco un uomo miseramente povero. Desidera moltissimo che l’ambiente in cui vive
 e le comodità della sua casa migliorino; eppure per tutto il tempo scansa il
@@ -212,7 +212,7 @@ datore di lavoro, adducendo l’insufficienza del salario. Un uomo simile non
 comprende i più semplici rudimenti di quei princìpi che sono il fondamento della
 vera prosperità, e non solo è del tutto inadatto a risollevarsi dalla propria
 miseria, ma sta attirando a sé una miseria ancora più profonda, dimorando in
-pensieri indolenti, ingannevoli e vili e agendo secondo essi.
+pensieri indolenti, ingannevoli e vili, e agendo secondo essi.
 
 Ecco un uomo ricco, vittima di una malattia dolorosa e ostinata, conseguenza
 della gola. È disposto a dare grosse somme di denaro per liberarsene, ma non
@@ -223,7 +223,7 @@ princìpi di una vita sana.
 
 Ecco un datore di lavoro che ricorre a mezzi tortuosi per non pagare il salario
 dovuto e, nella speranza di profitti maggiori, riduce la paga dei propri operai.
-Un uomo simile è del tutto inadatto alla prosperità; e quando si trova fallito,
+Un uomo simile è del tutto inadatto alla prosperità; e quando si ritrova fallito,
 tanto nella reputazione quanto nelle ricchezze, incolpa le circostanze, non
 sapendo di essere l’unico autore della propria condizione.
 
@@ -288,8 +288,8 @@ ricchezza si congiungono soltanto quando la ricchezza è usata rettamente e con
 saggezza; e il povero discende nella miseria soltanto quando considera la
 propria sorte un peso ingiustamente imposto.
 
-L’indigenza e l’eccesso sono i due estremi della miseria. Entrambi sono
-ugualmente innaturali, ed entrambi risultato di un disordine mentale. Un uomo
+L’indigenza e l’intemperanza sono i due estremi della miseria. Entrambi sono
+ugualmente innaturali, e sono entrambi il risultato di un disordine mentale. Un uomo
 non è nella giusta condizione finché non è un essere felice, sano e prospero; e
 felicità, salute e prosperità sono il risultato di un aggiustamento armonico
 dell’interno con l’esterno, dell’uomo con ciò che lo circonda.
@@ -319,8 +319,8 @@ Gli uomini immaginano che il pensiero possa restare segreto: non può.
 Rapidamente cristallizza in abitudine, e l’abitudine si solidifica in
 circostanza. I pensieri bestiali cristallizzano in abitudini di ubriachezza e di
 sensualità, che si solidificano in circostanze di distruzione e di malattia; i
-pensieri impuri di ogni specie cristallizzano in abitudini fiacche e confuse,
-che si solidificano in circostanze avverse e dissipanti; i pensieri di paura, di
+pensieri impuri di ogni specie cristallizzano in abitudini che snervano e confondono,
+che si solidificano in circostanze distraenti e avverse; i pensieri di paura, di
 dubbio e di indecisione cristallizzano in abitudini deboli, vili e irresolute,
 che si solidificano in circostanze di fallimento, di indigenza e di servile
 dipendenza; i pensieri pigri cristallizzano in abitudini di sciatteria e di
@@ -342,7 +342,7 @@ conservatrici; i pensieri amorevoli e disinteressati cristallizzano in abitudini
 di oblio di sé per gli altri, che si solidificano in circostanze di prosperità
 certa e duratura e di vera ricchezza.
 
-Un determinato corso di pensiero, perseverato – sia esso buono o cattivo – non
+Un determinato corso di pensiero in cui si persista – sia esso buono o cattivo – non
 può non produrre i suoi risultati sul carattere e sulle circostanze. Un uomo non
 può scegliere direttamente le proprie circostanze, ma può scegliere i propri
 pensieri, e così, indirettamente ma sicuramente, plasmare le proprie
@@ -361,11 +361,11 @@ combinazioni di colori che a ogni istante ti presenta sono le immagini
 squisitamente calibrate dei tuoi pensieri in continuo movimento. Sarai ciò che
 vorrai essere.
 
-> Lasci il fallimento la sua falsa consolazione\
+> Trovi il fallimento la sua falsa contentezza\
 > in quella povera parola, «ambiente»,\
 > ma lo spirito la disprezza, ed è libero.\
 > Domina il tempo, conquista lo spazio;\
-> intimidisce quel millantatore imbroglione che è il Caso,\
+> doma quel borioso imbroglione, il Caso,\
 > e ordina al tiranno Circostanza\
 > di deporre la corona e di prendere il posto di un servo.\
 > La Volontà umana, quella forza invisibile,\
@@ -670,7 +670,7 @@ tenere la contabilità, e di lì a poco varcare la porta che tanto a lungo ti è
 parsa la barriera dei tuoi ideali, e trovarti davanti a un pubblico – la penna
 ancora dietro l’orecchio, le dita macchiate d’inchiostro – e lì, in quel momento,
 riversare il torrente della tua ispirazione. Potresti condurre le pecore, e
-vagare fino alla città – campagnolo e a bocca aperta —, vagare sotto la guida
+vagare fino alla città – campagnolo e a bocca aperta –, vagare sotto la guida
 intrepida dello spirito fin dentro lo studio del maestro, e dopo un certo tempo
 egli dirà: “Non ho più nulla da insegnarti”. E ora sei diventato il maestro tu,
 che poco fa sognavi grandi cose mentre conducevi le pecore. Deporrai la sega e la

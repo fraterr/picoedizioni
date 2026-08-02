@@ -259,8 +259,8 @@ che sei – non come uomo, ma come il tuo vero sé, una consapevolezza senza vol
 e senza forma – e liberati dalla prigione che ti sei imposto. *Io sono il buon
 pastore, e conosco le mie pecore, e sono conosciuto dalle mie. Le mie pecore
 odono la mia voce, e io le conosco, ed esse mi seguono.* La consapevolezza è il
-buon pastore. Ciò che sono consapevole di essere è la pecora che mi segue. E
-tanto buona è pastora la tua consapevolezza, che non ha mai smarrito neppure una
+buon pastore. Ciò che sono consapevole di essere è la pecora che mi segue. E la
+tua consapevolezza è un pastore tanto buono, che non ha mai smarrito neppure una
 delle pecore che sei consapevole di essere.
 
 Io sono una voce che grida nel deserto della confusione umana per ciò che sono
@@ -268,11 +268,11 @@ consapevole di essere; e non verrà mai il tempo in cui ciò di cui sono convint
 di essere manchi di trovarmi. IO SONO è una porta aperta perché tutto ciò che
 sono possa entrare. La tua consapevolezza di essere è il signore e il pastore
 della tua vita. Così *il Signore è il mio pastore, nulla mi manca* si vede ora
-nella sua vera luce: è la tua coscienza. Non potresti mai mancare della prova, o
-essere privo dell’evidenza, di ciò che sei consapevole di essere.
+nella sua vera luce: è la tua coscienza. Non potresti mai mancare della prova,
+né essere privo dell’evidenza, di ciò che sei consapevole di essere.
 
 Se questo è vero, perché non diventare consapevole di essere grande, amante di
-Dio, ricco, sano, e tutti gli attributi che ammiri?
+Dio, ricco, sano, e tutto ciò che ammiri?
 
 È altrettanto facile possedere la coscienza di queste qualità quanto possedere
 quella dei loro contrari, perché non hai la tua coscienza presente a causa del
@@ -312,22 +312,22 @@ La porta è la tua coscienza. Aprire la porta significa diventare una cosa sola
 con ciò che bussa, SENTENDOSI la cosa desiderata. Sentire il proprio desiderio
 come impossibile significa chiudere la porta, ossia negare espressione a questo
 impulso. Salire nella coscienza fino alla naturalezza della cosa sentita
-significa spalancare la porta e invitare questo tale a incarnarsi.
+significa spalancare la porta e invitarlo a incarnarsi.
 
 Ecco perché è costantemente ricordato che Gesù lasciò il mondo della
 manifestazione e ascese al Padre suo. Gesù, come te e come me, trovò tutte le
 cose impossibili a Gesù in quanto uomo. Ma avendo scoperto che il Padre suo era
 lo stato di coscienza della cosa desiderata, non fece che lasciarsi alle spalle
 la coscienza di Gesù e salire nella coscienza fino allo stato desiderato,
-restandovi finché non fu una cosa sola con esso. E come si fece uno con quello,
-quello divenne in espressione.
+restandovi finché non fu una cosa sola con esso. E facendosi uno con quello,
+quello divenne la sua espressione.
 
 È questo il semplice messaggio di Gesù all’uomo: gli uomini non sono che vesti
 in cui dimora l’essere impersonale, IO SONO, la presenza che gli uomini chiamano
 Dio. Ogni veste ha le sue limitazioni. Per trascenderle e dare espressione a ciò
 che, come uomo – come Tizio – ti trovi incapace di fare, distogli l’attenzione
 dalle tue limitazioni presenti, ossia dalla concezione di te stesso come Tizio,
-e ti immergi nella sensazione di *essere* ciò che desideri. Come esattamente
+e immergiti nella sensazione di *essere* ciò che desideri. Come esattamente
 questo desiderio, o questa coscienza appena raggiunta, si incarnerà, nessun uomo
 lo sa. Perché l’*io*, ossia la coscienza appena raggiunta, ha vie che tu non
 conosci; le sue vie sono imperscrutabili. Non fare congetture sul COME questa
@@ -475,7 +475,7 @@ salvarti, ma la salute diventerà il tuo salvatore. Rivendica dunque: *io sono
 lui*; in altre parole, rivendica te stesso come la cosa desiderata. Rivendicala
 nella coscienza, non a parole, e la coscienza ti ricompenserà con la tua
 rivendicazione. Ti è detto: *Mi troverete quando mi CERCHERETE col sentimento*.
-Ebbene, cerca col sentimento quella qualità nella coscienza finché non ti SENTA
+Ebbene, cerca col sentimento quella qualità nella coscienza finché non SENTIRAI
 di esserla. Quando ti sarai perduto nella sensazione di esserla, quella qualità
 si incarnerà nel tuo mondo.
 
@@ -484,7 +484,8 @@ Perché ho sentito che una forza è uscita da me* [Luca 8,45-46]. Sì: il giorno
 cui toccherai questo essere dentro di te, SENTENDOTI curato o guarito, le forze
 usciranno dal tuo stesso sé e si solidificheranno nel tuo mondo come guarigioni.
 È detto: *Credete in Dio; credete anche in me, perché io sono lui.* Abbi la fede
-di Dio. Egli si fece uno con Dio e non stimò rapina compiere le opere di Dio.
+di Dio. Egli si fece uno con Dio e non ritenne una rapina compiere le opere di
+Dio.
 Va’ e fa’ altrettanto. Sì: comincia a credere che la tua consapevolezza, la tua
 coscienza di essere, è Dio. Rivendica per te tutti gli attributi che finora hai
 attribuito a un Dio esterno, e comincerai a esprimere queste rivendicazioni.
@@ -648,7 +649,7 @@ prendere il largo verso acque più profonde, perché dentro la tua coscienza
 presente simili pesci, o desideri, non possono nuotare. Per prendere il largo
 verso acque più profonde, lasci alle spalle tutto ciò che ora è il tuo problema
 o la tua limitazione, TOGLIENDOGLI L’ATTENZIONE. Volta completamente le spalle a
-ogni problema e a ogni limitazione che ora possiedi. Sòffermati sul puro essere
+ogni problema e a ogni limitazione che ora possiedi. Soffermati sul puro essere
 dicendo a te stesso: IO SONO, IO SONO, IO SONO. Continua a dichiarare a te stesso
 che semplicemente sei. Non condizionare questa dichiarazione: continua soltanto a
 SENTIRTI essere, e senza preavviso ti troverai a mollare l’ancora che ti legava

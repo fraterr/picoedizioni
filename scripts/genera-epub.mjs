@@ -34,7 +34,13 @@ function inXhtml(blocchi) {
   return blocchi
     .map((blocco) => {
       if (blocco.startsWith('> ')) {
-        return `<blockquote><p>${corsivi(scappa(blocco.slice(2)))}</p></blockquote>`;
+        // I versi vanno a capo dove l'autore li ha mandati a capo: ogni riga
+        // della citazione resta una riga, non si fondono in un paragrafo.
+        const righe = blocco
+          .split('\n')
+          .map((r) => corsivi(scappa(r.replace(/^>\s?/, '').replace(/\\$/, '').trim())))
+          .filter(Boolean);
+        return `<blockquote><p>${righe.join('<br/>\n      ')}</p></blockquote>`;
       }
       return `<p>${corsivi(scappa(blocco))}</p>`;
     })

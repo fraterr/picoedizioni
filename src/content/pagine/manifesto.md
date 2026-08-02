@@ -10,8 +10,8 @@ sommario: "Pico Edizioni è una casa editrice senza scopo di lucro. Traduce in i
 Nel 1486 Giovanni Pico della Mirandola scrive l'*Oratio de hominis dignitate*.
 Al centro di quel discorso c'è una frase che nella storia del pensiero europeo
 non aveva precedenti: all'uomo non è stata assegnata né una sede fissa né una
-forma propria, perché sia egli stesso *plastes et fictor* — plasmatore e
-scultore — di sé.
+forma propria, perché sia egli stesso *plastes et fictor* – plasmatore e
+scultore – di sé.
 
 È l'idea che, per vie tortuose e attraverso quattro secoli, riaffiora
 nell'America di fine Ottocento sotto il nome di New Thought, e che libri come
@@ -29,7 +29,7 @@ esoterica e magica occidentale.
 Sono testi che circolano in italiano quasi esclusivamente in versioni ricavate
 da traduttori automatici, non rilette, spesso ricavate da altre traduzioni
 anziché dall'originale. Un testo che ragiona sul significato preciso di una
-parola — *feeling*, *assumption*, *state* — non sopravvive a un trattamento
+parola – *feeling*, *assumption*, *state* – non sopravvive a un trattamento
 simile: quando il lessico si sfalda, l'argomento sparisce.
 
 ## Come traduciamo

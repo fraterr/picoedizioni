@@ -21,13 +21,21 @@
 // Uso:  npm run normalizza -- --prova     (mostra e non scrive)
 //       npm run normalizza                (scrive)
 // ─────────────────────────────────────────────────────────────────────────────
-import { readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const RADICE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR_TESTI = join(RADICE, 'src', 'content', 'testi');
 const DIR_ANTEPRIME = join(RADICE, 'src', 'content', 'anteprime');
+// Anche schede e pagine vanno normalizzate, altrimenti la quarta di copertina
+// e il testo del libro finiscono sulla stessa schermata con lineette diverse.
+// Su questi file si applicano SOLO le regole innocue per il frontmatter YAML:
+// convertire le virgolette dritte in caporali spezzerebbe titolo: "…".
+const DIR_APPARATO = [
+  join(RADICE, 'src', 'content', 'libri'),
+  join(RADICE, 'src', 'content', 'pagine'),
+];
 // L'anteprima si chiude al primo titolo di capitolo dopo la soglia, così i
 // libri divisi in capitoli ne offrono uno intero. Ma un libro senza capitoli
 // non incontrerebbe mai quel titolo: da qui il tetto massimo.
@@ -207,5 +215,49 @@ for (const file of readdirSync(DIR_TESTI).filter((f) => f.endsWith('.md'))) {
     console.log(`   anteprima rigenerata: ${parole} parole`);
   }
 }
+
+// ── apparato: schede e pagine ───────────────────────────────────────────────
+// Qui si tocca il minimo indispensabile, perché questi file contengono
+// frontmatter YAML ed elenchi Markdown, e due regole apparentemente innocue
+// li distruggono:
+//   · convertire le virgolette dritte in caporali romperebbe  titolo: "…"
+//   · convertire un trattino a inizio riga trasformerebbe il marcatore di
+//     elenco  «  - voce»  in  «  – voce», che non è più un elenco
+//   · comprimere gli spazi doppi cancellerebbe le indentazioni
+// Resta perciò la sola lineetta incisiva, riconoscibile perché preceduta da
+// una parola e non dall'inizio della riga.
+function normalizzaApparato(testo) {
+  return (
+    testo
+      .replace(/\.\.\./g, '…')
+      .replace(/(?<=\S)[ \t]+[-–—]{1,2}[ \t]+/g, ' – ')
+      // Stesso caso, ma con la lineetta in fondo alla riga. Il \r? non è
+      // pignoleria: su Windows i file hanno terminatori CRLF, e senza di
+      // quello la regola non aggancia mai la fine riga.
+      .replace(/(?<=\S)[ \t]+[-–—]{1,2}(?=\r?\n)/g, ' –')
+      // Lineetta a inizio riga: è un inciso andato a capo, non un elenco.
+      // Un elenco Markdown usa il trattino semplice, mai la lineetta lunga:
+      // per questo qui si escludono i "-" e si toccano solo "–" e "—".
+      .replace(/^[–—](?=[ \t])/gm, '–')
+  );
+}
+
+let toccati = 0;
+for (const cartella of DIR_APPARATO) {
+  if (!existsSync(cartella)) continue;
+  for (const file of readdirSync(cartella).filter((f) => f.endsWith('.md'))) {
+    const percorso = join(cartella, file);
+    const sorgente = readFileSync(percorso, 'utf8');
+    const nuovo = normalizzaApparato(sorgente);
+    if (nuovo !== sorgente) {
+      toccati++;
+      const lunghe = (sorgente.match(/—/g) || []).length;
+      console.log(`\n══ ${file} (apparato)`);
+      console.log(`   lineette lunghe → medie: ${lunghe}`);
+      if (!prova) writeFileSync(percorso, nuovo, 'utf8');
+    }
+  }
+}
+if (toccati === 0) console.log('\n(apparato: già a posto)');
 
 console.log(prova ? '\n(prova: non ho scritto niente)\n' : '');

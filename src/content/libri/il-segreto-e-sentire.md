@@ -16,17 +16,17 @@ pubblicato: 2022-05-09
 inEvidenza: true
 indice:
   - "Prefazione"
-  - "Capitolo Uno — La legge e il suo funzionamento"
-  - "Capitolo Due — Il sonno"
-  - "Capitolo Tre — La preghiera"
-  - "Capitolo Quattro — Sentire"
+  - "Capitolo Uno – La legge e il suo funzionamento"
+  - "Capitolo Due – Il sonno"
+  - "Capitolo Tre – La preghiera"
+  - "Capitolo Quattro – Sentire"
 quarta: >-
   Quattro capitoli e una prefazione: in poco più di venti pagine, nel 1944,
   Neville Goddard condensa il nucleo di tutto il suo insegnamento. La coscienza
   è l'unica realtà, e il mondo visibile non è che la sua forma condizionata.
   Fra il desiderio e la sua realizzazione non stanno la volontà, lo sforzo o la
   ripetizione di formule: sta il sentire. Imprimere nel subconscio la sensazione
-  del desiderio già compiuto — questo, e nient'altro, è il segreto. Goddard
+  del desiderio già compiuto – questo, e nient'altro, è il segreto. Goddard
   indica anche il momento in cui l'operazione riesce meglio: la soglia del
   sonno, quando il controllo della ragione si allenta. È un libro
   deliberatamente privo di argomentazioni e di prove: l'autore rinuncia a
@@ -56,6 +56,6 @@ le traduzioni di Pico Edizioni:
 - *I AM* → **IO SONO**, in maiuscolo, perché nell'originale è insieme il nome
   divino dell'Esodo e la più comune delle espressioni umane.
 
-Le immagini fisiologiche — impressione, impregnazione, gestazione — sono rese
+Le immagini fisiologiche – impressione, impregnazione, gestazione – sono rese
 alla lettera. Sono deliberate: Goddard descrive la creazione come un
 concepimento, e attenuarle significherebbe cancellare il suo argomento.

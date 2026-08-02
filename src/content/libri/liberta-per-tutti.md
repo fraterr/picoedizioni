@@ -16,15 +16,15 @@ pubblicato: 2022-05-08
 inEvidenza: true
 indice:
   - "Prefazione"
-  - "Capitolo uno — L'unicità di Dio"
-  - "Capitolo due — Il nome di Dio"
-  - "Capitolo tre — La legge della creazione"
-  - "Capitolo quattro — Il segreto del sentimento"
-  - "Capitolo cinque — Il Sabbath"
-  - "Capitolo sei — Guarigione"
-  - "Capitolo sette — Desiderio, la parola di Dio"
-  - "Capitolo otto — Fede"
-  - "Capitolo nove — L'annunciazione"
+  - "Capitolo uno – L'unicità di Dio"
+  - "Capitolo due – Il nome di Dio"
+  - "Capitolo tre – La legge della creazione"
+  - "Capitolo quattro – Il segreto del sentimento"
+  - "Capitolo cinque – Il Sabbath"
+  - "Capitolo sei – Guarigione"
+  - "Capitolo sette – Desiderio, la parola di Dio"
+  - "Capitolo otto – Fede"
+  - "Capitolo nove – L'annunciazione"
 quarta: >-
   Il primo libro di Neville Goddard, pubblicato nel 1942, è anche il più
   ambizioso: una lettura integralmente psicologica della Bibbia. I nomi, i
@@ -49,7 +49,7 @@ italiana corrente avrebbe fatto crollare più di un ragionamento: dove la *King
 James* dice *I AM*, la CEI dice «Io sono colui che sono», e l'equivoco voluto fra
 il nome di Dio e la coscienza di sé si perde. Le citazioni sono quindi tradotte
 direttamente dalla versione usata dall'autore. I riferimenti fra parentesi quadre
-— libro, capitolo, versetto — sono aggiunti dal traduttore: non compaiono
+– libro, capitolo, versetto – sono aggiunti dal traduttore: non compaiono
 nell'originale, dove Goddard cita spesso a memoria e senza indicazione.
 
 **Il Sabbath.** È rimasto in questa forma, e non è diventato «il sabato». Nel
@@ -59,6 +59,6 @@ corrente avrebbe ridotto a una nota di costume religioso.
 
 **Il glossario.** Come negli altri volumi: *consciousness* → **coscienza**,
 *subconscious* → **subconscio**, *assumption* → **assunzione**, *state* →
-**stato**, *I AM* → **IO SONO**. Il lessico del concepimento — impressione,
-impregnazione, gestazione — è mantenuto alla lettera, perché in Goddard non è
+**stato**, *I AM* → **IO SONO**. Il lessico del concepimento – impressione,
+impregnazione, gestazione – è mantenuto alla lettera, perché in Goddard non è
 un ornamento retorico ma la struttura stessa della spiegazione.

@@ -47,5 +47,5 @@ queste pagine, però, nulla di quei siti viene caricato qui.
 
 ## Contatti
 
-Per qualunque richiesta relativa ai vostri dati — o semplicemente per chiedermi
-conto di questa pagina — l'indirizzo è nella [pagina dei contatti](/contatti/).
+Per qualunque richiesta relativa ai vostri dati – o semplicemente per chiedermi
+conto di questa pagina – l'indirizzo è nella [pagina dei contatti](/contatti/).

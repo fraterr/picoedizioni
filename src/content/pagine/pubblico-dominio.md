@@ -43,8 +43,8 @@ L'ultimo punto non è gelosia. Una traduzione risponde di sé riga per riga: se
 circola in una versione alterata sotto lo stesso nome, il lettore non ha più modo
 di sapere di chi siano le scelte che sta leggendo.
 
-Per usi non previsti da questa licenza — un audiolibro, una versione ridotta, un
-adattamento scolastico — [chiedete](/contatti/). La risposta è quasi sempre sì.
+Per usi non previsti da questa licenza – un audiolibro, una versione ridotta, un
+adattamento scolastico – [chiedete](/contatti/). La risposta è quasi sempre sì.
 
 ## I testi originali in inglese
 

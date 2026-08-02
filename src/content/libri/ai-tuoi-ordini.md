@@ -19,9 +19,9 @@ indice:
   - "Ai tuoi ordini"
 quarta: >-
   È il primo libro di Neville Goddard, pubblicato a New York nel 1939, e nella
-  sua brevità contiene già tutto. La domanda con cui si apre — può l'uomo
-  decretare una cosa e vederla accadere? — riceve subito la risposta più netta
-  che l'autore abbia mai dato, e le sessanta pagine che seguono non fanno che
+  sua brevità contiene già tutto. La domanda con cui si apre – può l'uomo
+  decretare una cosa e vederla accadere? – riceve subito la risposta più netta
+  che l'autore abbia mai dato, e le poche pagine che seguono non fanno che
   mostrarne il funzionamento. Dio non è un essere separato a cui rivolgere
   suppliche, ma la consapevolezza di essere di ciascuno; la Bibbia non è la
   cronaca di un popolo antico, ma un dramma psicologico che si svolge nella
@@ -33,7 +33,7 @@ quarta: >-
 ---
 
 **Il titolo.** *At Your Command* è la formula con cui in inglese si risponde a
-chi comanda — «ai suoi ordini», «comandi pure» — e Goddard la rovescia: non sei
+chi comanda – «ai suoi ordini», «comandi pure» – e Goddard la rovescia: non sei
 tu a essere agli ordini del mondo, è il mondo a essere ai tuoi. L'ultima riga del
 libro scioglie il titolo per intero, e la traduzione doveva conservare quella
 chiusa. *Ai tuoi ordini* mantiene sia l'idioma sia il capovolgimento.
@@ -62,13 +62,13 @@ coscienza**. Il verbo *to out-picture*, che in inglese è quasi un neologismo
 dell'autore, è reso con **proiettare fuori di sé**: perifrasi, ma nessuna parola
 italiana singola fa quel lavoro.
 
-**Le maiuscole.** Goddard scrive in maiuscolo alcune parole nel corpo del testo —
-FEEL, ATTENTION, DECREE — nei punti in cui vuole che il lettore si fermi. Sono
+**Le maiuscole.** Goddard scrive in maiuscolo alcune parole nel corpo del testo –
+FEEL, ATTENTION, DECREE – nei punti in cui vuole che il lettore si fermi. Sono
 conservate tutte, e nelle stesse posizioni.
 
 **Le citazioni bibliche** sono tradotte dalla *King James Version*, che è la
 versione che Goddard aveva sotto gli occhi e sulle cui parole costruisce i
-ragionamenti. I riferimenti fra parentesi quadre — libro, capitolo, versetto —
+ragionamenti. I riferimenti fra parentesi quadre – libro, capitolo, versetto –
 sono aggiunti dal traduttore: nell'originale non compaiono, perché Goddard cita
 a memoria e senza indicazione. Dove la citazione era troppo libera per essere
 ricondotta con certezza a un versetto, il riferimento è stato omesso anziché

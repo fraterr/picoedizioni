@@ -29,7 +29,7 @@ quarta: >-
   L'assunto sta nel titolo, ripreso da un versetto dei Proverbi: l'uomo è
   letteralmente ciò che pensa, e il suo carattere è la somma completa dei suoi
   pensieri. Da qui Allen procede con una serie di immagini che si sono
-  incise nella lingua di chi è venuto dopo — la mente come giardino da coltivare
+  incise nella lingua di chi è venuto dopo – la mente come giardino da coltivare
   o da lasciare inselvatichire, il pensiero che cristallizza in abitudine e si
   solidifica in circostanza, il carattere che non è dato ma tessuto. Nella
   prefazione l'autore avverte di non aver scritto un trattato: il libro
@@ -38,12 +38,12 @@ quarta: >-
 ---
 
 **Il titolo.** *As a Man Thinketh* è la citazione monca di un versetto dei
-Proverbi nella *King James Version* — «for as he thinketh in his heart, so is
-he» — che Allen riporta per esteso nella prima riga del primo capitolo. La
+Proverbi nella *King James Version* – «for as he thinketh in his heart, so is
+he» – che Allen riporta per esteso nella prima riga del primo capitolo. La
 traduzione doveva conservare il taglio, che è la firma del libro: il titolo si
 interrompe a metà proposizione, e il lettore è lasciato a completarla. *Come
 l'uomo pensa* fa la stessa cosa, e mantiene la cadenza biblica che «L'uomo è ciò
-che pensa» — resa corrente in italiano — avrebbe appiattito.
+che pensa» – resa corrente in italiano – avrebbe appiattito.
 
 **L'uomo.** Allen scrive *man* per l'essere umano in genere, secondo l'uso del
 1903, e alterna la terza persona al *tu* quando si rivolge direttamente al
@@ -63,7 +63,7 @@ novecentesco e clinico; *blessedness* → **beatitudine**; *righteousness* →
 l'ornamento: la mente come giardino, con il suo giardiniere, le sue erbacce e i
 suoi semi; e la catena *crystallize / solidify*, resa **cristallizzare** e
 **solidificare**, in un capoverso dove Allen la ripete quattordici volte di
-fila. La ripetizione è voluta — è un martellamento — e non è stata alleggerita.
+fila. La ripetizione è voluta – è un martellamento – e non è stata alleggerita.
 
 **I versi.** Il libro contiene due passi in versi: l'epigrafe del primo
 capitolo, che è il *Dhammapada* nella versione inglese in versi di Edwin Arnold,

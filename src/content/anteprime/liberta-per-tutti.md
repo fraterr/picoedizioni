@@ -1,9 +1,9 @@
 ---
 libro: liberta-per-tutti
-parole: 1384
+parole: 1385
 ---
 
-PREFAZIONE
+## Prefazione
 
 L’opinione pubblica non sopporterà a lungo una teoria che non funziona nella pratica. Oggi, probabilmente più che mai, l’uomo esige la prova della verità anche del suo più alto ideale. Per la soddisfazione finale l’uomo deve trovare un principio che sia per lui un modo di vivere, un principio che possa sperimentare come vero.
 

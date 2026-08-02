@@ -28,7 +28,11 @@ import { fileURLToPath } from 'node:url';
 const RADICE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR_TESTI = join(RADICE, 'src', 'content', 'testi');
 const DIR_ANTEPRIME = join(RADICE, 'src', 'content', 'anteprime');
+// L'anteprima si chiude al primo titolo di capitolo dopo la soglia, così i
+// libri divisi in capitoli ne offrono uno intero. Ma un libro senza capitoli
+// non incontrerebbe mai quel titolo: da qui il tetto massimo.
 const PAROLE_ANTEPRIMA = 1200;
+const PAROLE_ANTEPRIMA_MAX = 2600;
 
 const prova = process.argv.includes('--prova');
 
@@ -188,6 +192,7 @@ for (const file of readdirSync(DIR_TESTI).filter((f) => f.endsWith('.md'))) {
     let parole = 0;
     for (const blocco of finali) {
       if (parole >= PAROLE_ANTEPRIMA && blocco.startsWith('## ')) break;
+      if (parole >= PAROLE_ANTEPRIMA_MAX) break;
       scelti.push(blocco);
       parole += blocco.split(/\s+/).length;
     }

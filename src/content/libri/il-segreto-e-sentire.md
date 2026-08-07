@@ -6,6 +6,7 @@ autore: "Neville Goddard"
 titoloOriginale: "Feeling Is the Secret"
 annoOriginale: 1944
 annoTraduzione: 2022
+edizione: 1
 pagine: 22
 parole: 5289
 copertina: /copertine/il-segreto-e-sentire.png

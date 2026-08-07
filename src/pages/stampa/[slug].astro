@@ -37,6 +37,13 @@ interface Props {
 const { libro, testo } = Astro.props;
 const d = libro.data;
 const { Content } = await testo.render();
+
+// «Prima edizione digitale», «Seconda edizione digitale, riveduta»…
+const ORDINALI = ['Prima', 'Seconda', 'Terza', 'Quarta', 'Quinta', 'Sesta', 'Settima', 'Ottava', 'Nona', 'Decima'];
+const etichettaEdizione =
+  d.edizione === 1
+    ? 'Prima edizione digitale'
+    : `${ORDINALI[d.edizione - 1] ?? `${d.edizione}ª`} edizione digitale, riveduta`;
 ---
 
 <!doctype html>
@@ -81,7 +88,7 @@ const { Content } = await testo.render();
         </p>
         <p>
           Traduzione italiana di Pico Edizioni, {d.annoTraduzione}.<br />
-          Edizione digitale composta in EB Garamond.
+          {etichettaEdizione}, composta in EB Garamond.
         </p>
         <p>
           Questa traduzione è frutto di un lavoro volontario e non è in vendita.

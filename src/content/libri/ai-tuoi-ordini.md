@@ -6,6 +6,7 @@ autore: "Neville Goddard"
 titoloOriginale: "At Your Command"
 annoOriginale: 1939
 annoTraduzione: 2026
+edizione: 1
 pagine: 27
 parole: 8122
 copertina: /copertine/ai-tuoi-ordini.png

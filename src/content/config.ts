@@ -11,6 +11,9 @@ const libri = defineCollection({
     titoloOriginale: z.string(),
     annoOriginale: z.number(),
     annoTraduzione: z.number(),
+    // Cresce a ogni revisione pubblicata: così chi ha scaricato un file
+    // può capire dal colophon se è aggiornato.
+    edizione: z.number().optional().default(1),
     pagine: z.number(),
     parole: z.number(),
     copertina: z.string(),

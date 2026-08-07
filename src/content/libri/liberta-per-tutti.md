@@ -6,6 +6,7 @@ autore: "Neville Goddard"
 titoloOriginale: "Freedom for All. A Practical Application of the Bible"
 annoOriginale: 1942
 annoTraduzione: 2022
+edizione: 1
 pagine: 45
 parole: 11427
 copertina: /copertine/liberta-per-tutti.png

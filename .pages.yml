@@ -78,6 +78,15 @@ content:
         type: number
         required: true
         options: { min: 1900, max: 2100, step: 1 }
+      - name: edizione
+        label: Numero di edizione
+        type: number
+        options: { min: 1, max: 99, step: 1 }
+        description: >-
+          Parte da 1 e cresce a ogni revisione pubblicata: compare nel
+          colophon del sito, dell'ePub e del PDF, così chi ha scaricato
+          un file sa se è aggiornato. Dopo averlo alzato vanno rigenerati
+          ePub e PDF.
       - name: pagine
         label: Pagine
         type: number

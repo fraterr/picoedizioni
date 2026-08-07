@@ -96,9 +96,15 @@ nav li { margin: 0.5em 0; }
 `;
 
 // ── composizione di un volume ───────────────────────────────────────────────
+const ORDINALI = ['Prima', 'Seconda', 'Terza', 'Quarta', 'Quinta', 'Sesta', 'Settima', 'Ottava', 'Nona', 'Decima'];
+const etichettaEdizione = (n) =>
+  n === 1
+    ? 'Prima edizione digitale'
+    : `${ORDINALI[n - 1] ?? `${n}ª`} edizione digitale, riveduta`;
+
 function componi(slug) {
   const scheda = leggiScheda(join(DIR_SCHEDE, `${slug}.md`));
-  const testo = readFileSync(join(DIR_TESTI, `${slug}.md`), 'utf8');
+  const testo = readFileSync(join(DIR_TESTI, `${slug}.md`), 'utf8').replace(/\r\n/g, '\n');
   const corpo = testo.slice(testo.indexOf('---', 4) + 4);
 
   // divisione in capitoli
@@ -164,7 +170,8 @@ function componi(slug) {
       `<div class="colophon">
       <p>Titolo originale: <em>${scappa(scheda.titoloOriginale)}</em><br/>
          Prima edizione ${scappa(scheda.annoOriginale)}. Opera di pubblico dominio.</p>
-      <p>Traduzione italiana di Pico Edizioni, ${scappa(scheda.annoTraduzione)}.</p>
+      <p>Traduzione italiana di Pico Edizioni, ${scappa(scheda.annoTraduzione)}.<br/>
+         ${scappa(etichettaEdizione(scheda.edizione))}.</p>
       <p>Questa traduzione è frutto di un lavoro volontario e non è in vendita.
          È distribuita sotto licenza ${scappa(sito.licenza.nome)}: siete liberi di
          scaricarla, stamparla e ridistribuirla gratuitamente, citando la fonte;

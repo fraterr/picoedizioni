@@ -6,6 +6,7 @@ autore: "James Allen"
 titoloOriginale: "As a Man Thinketh"
 annoOriginale: 1903
 annoTraduzione: 2026
+edizione: 1
 pagine: 30
 parole: 7451
 copertina: /copertine/come-l-uomo-pensa.png

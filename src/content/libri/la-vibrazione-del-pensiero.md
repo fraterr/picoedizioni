@@ -6,6 +6,7 @@ autore: "William Walker Atkinson"
 titoloOriginale: "Thought Vibration or The Law of Attraction in the Thought World"
 annoOriginale: 1906
 annoTraduzione: 2026
+edizione: 1
 pagine: 86
 parole: 24003
 copertina: /copertine/la-vibrazione-del-pensiero.png

@@ -1,6 +1,6 @@
 ---
 libro: la-vibrazione-del-pensiero
-parole: 2645
+parole: 2648
 ---
 
 ## Prefazione
@@ -46,3 +46,5 @@ Non v’impacciate di teorie né di enigmi insolubili – mettetevi all’opera 
 Smettete di essere lune. Smettete di vivere di luce riflessa. Entrate in azione e convertitevi in un sole vivente. Potete farlo. È in vostro potere. Ogni anima umana contiene in sé gli elementi del Sole – mettetevi al lavoro ed esprimete voi stessi. Raddrizzate la spina dorsale e tenete alta la testa. Non abbiate paura di dire: «quel sole sono io».
 
 Questo è un discorso schietto, senza giri di parole. Non ditemi che siete miei «discepoli» – vi rinnego; mi rifiuto di avere discepoli. Non provate a «sedervi ai miei piedi» – se lo fate, i piedi li userò per spingervi giù dalla piattaforma. Mi serve spazio per dondolare i piedi, e non voglio gente seduta lì. Ma se volete chiamarmi «fratello», o «compagno di studi», o «compagno di scuola nell’asilo di Dio», sarò lieto che lo facciate. È tutto ciò che siamo, in fin dei conti – piccoli lattanti che tirano al seno dell’Assoluto.
+
+William Walker Atkinson

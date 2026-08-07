@@ -1,6 +1,6 @@
 ---
 libro: come-l-uomo-pensa
-parole: 2660
+parole: 2910
 ---
 
 ## Prefazione
@@ -266,3 +266,24 @@ tale conoscenza, guardando indietro alla propria ignoranza e alla propria
 cecità, saprà allora che la sua vita è, e sempre fu, ordinata con giustizia, e
 che tutte le sue esperienze passate, buone e cattive, erano l’equo dispiegarsi
 del suo sé in evoluzione, e non ancora evoluto.
+
+Pensieri e azioni buoni non possono mai produrre risultati cattivi; pensieri e
+azioni cattivi non possono mai produrre risultati buoni. Il che equivale a dire
+che dal grano non può venire che grano, e dalle ortiche che ortiche. Gli uomini
+comprendono questa legge nel mondo naturale e vi collaborano; ma pochi la
+comprendono nel mondo mentale e morale – benché lì operi in modo altrettanto
+semplice e senza deviazioni – e perciò non vi collaborano. La sofferenza è
+sempre l’effetto di un pensiero errato in qualche direzione. È l’indicazione che
+l’individuo è in disaccordo con sé stesso, con la Legge del proprio essere.
+L’unico e supremo uso della sofferenza è purificare, bruciare via tutto ciò che
+è inutile e impuro. La sofferenza cessa per chi è puro. Non avrebbe scopo
+bruciare l’oro dopo che le scorie sono state tolte, e un essere perfettamente
+puro e illuminato non potrebbe soffrire. Le circostanze che un uomo incontra con
+sofferenza sono il risultato della sua disarmonia mentale. Le circostanze che un
+uomo incontra con beatitudine sono il risultato della sua armonia mentale. La
+beatitudine, e non i beni materiali, è la misura del pensiero retto; la miseria,
+e non la mancanza di beni materiali, è la misura del pensiero errato. Un uomo
+può essere maledetto e ricco; può essere benedetto e povero. Beatitudine e
+ricchezza si congiungono soltanto quando la ricchezza è usata rettamente e con
+saggezza; e il povero discende nella miseria soltanto quando considera la
+propria sorte un peso ingiustamente imposto.

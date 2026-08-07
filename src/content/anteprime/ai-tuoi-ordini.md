@@ -1,6 +1,6 @@
 ---
 libro: ai-tuoi-ordini
-parole: 2623
+parole: 2957
 ---
 
 ## Prefazione
@@ -236,3 +236,29 @@ puoi cambiare il tuo riflesso distruggendo lo specchio. Il tuo ambiente, e tutto
 ciò che vi si trova, riflette ciò che sei nella coscienza. Finché continuerai a
 essere quello nella coscienza, tanto a lungo continuerai a proiettarlo fuori nel
 tuo mondo.
+
+Sapendo questo, comincia a rivalutare te stesso. L’uomo ha attribuito a sé
+stesso troppo poco valore. Nel Libro dei Numeri leggerai: *In quel tempo c’erano
+giganti nel paese; e noi eravamo ai nostri occhi come cavallette, e come
+cavallette eravamo ai loro occhi* [Numeri 13,33]. Questo non significa un’epoca
+remota in cui gli uomini avessero statura di giganti. Oggi è il giorno, l’eterno
+adesso, in cui le condizioni che ti circondano hanno assunto l’aspetto di
+giganti – la disoccupazione, gli eserciti dei tuoi nemici, i tuoi problemi e
+tutte le cose che sembrano minacciarti: sono quelli i giganti che ti fanno
+sentire una cavalletta. Ma ti è detto che tu eri anzitutto una cavalletta ai
+tuoi stessi occhi, e per questo eri una cavalletta agli occhi dei giganti. In
+altre parole, puoi essere per gli altri soltanto ciò che sei prima per te
+stesso. Perciò rivalutare te stesso e cominciare a sentirti il gigante, un
+centro di potenza, significa rimpicciolire quei giganti di prima e farne delle
+cavallette. *Tutti gli abitanti della terra sono un nulla; egli agisce secondo
+la sua volontà nell’esercito del cielo e fra gli abitanti della terra; nessuno
+può fermare la sua mano né dirgli: che cosa fai?* [Daniele 4,35]. Colui di cui
+qui si parla non è il Dio ortodosso seduto nello spazio, ma l’unico e solo Dio,
+il padre eterno: la tua consapevolezza di essere. Destati dunque alla potenza
+che sei – non come uomo, ma come il tuo vero sé, una consapevolezza senza volto
+e senza forma – e liberati dalla prigione che ti sei imposto. *Io sono il buon
+pastore, e conosco le mie pecore, e sono conosciuto dalle mie. Le mie pecore
+odono la mia voce, e io le conosco, ed esse mi seguono.* La consapevolezza è il
+buon pastore. Ciò che sono consapevole di essere è la pecora che mi segue. E la
+tua consapevolezza è un pastore tanto buono, che non ha mai smarrito neppure una
+delle pecore che sei consapevole di essere.

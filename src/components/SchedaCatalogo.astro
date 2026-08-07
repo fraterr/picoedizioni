@@ -10,6 +10,10 @@ interface Props {
 const { libro } = Astro.props;
 const d = libro.data;
 const indirizzo = u(`/catalogo/${libro.slug}/`);
+
+// Nella scheda basta il titolo principale: si tronca al punto e all'« or »
+// dei titoli ottocenteschi («Thought Vibration or The Law of…»).
+const titoloBreve = d.titoloOriginale.split('.')[0].split(' or ')[0];
 ---
 
 <article class="scheda">
@@ -20,7 +24,7 @@ const indirizzo = u(`/catalogo/${libro.slug}/`);
       <h3 class="scheda__titolo">{d.titolo}</h3>
       {d.sottotitolo && <p class="scheda__sottotitolo">{d.sottotitolo}</p>}
       <p class="scheda__dati tenue">
-        <span>{d.titoloOriginale.split('.')[0]}, {d.annoOriginale}</span>
+        <span>{titoloBreve}, {d.annoOriginale}</span>
         <span aria-hidden="true"> · </span>
         <span>{numero(d.pagine)} pagine</span>
       </p>

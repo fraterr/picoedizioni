@@ -1,0 +1,17 @@
+# Gli script della filiera leggono i file dei contenuti con espressioni
+# regolari che presuppongono fine riga LF. Qui si impone LF a ogni checkout,
+# qualunque sia la piattaforma e il valore di core.autocrlf: senza questa
+# regola, un clone su Windows arriva in CRLF e genera-copertine si rompe.
+* text=auto
+*.md text eol=lf
+*.mjs text eol=lf
+*.astro text eol=lf
+*.ts text eol=lf
+*.css text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.svg text eol=lf
+
+*.png binary
+*.epub binary
+*.pdf binary

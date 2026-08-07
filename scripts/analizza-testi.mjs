@@ -95,7 +95,7 @@ function analizza(testo) {
 }
 
 for (const file of readdirSync(DIR_TESTI).filter((f) => f.endsWith('.md'))) {
-  const r = analizza(readFileSync(join(DIR_TESTI, file), 'utf8'));
+  const r = analizza(readFileSync(join(DIR_TESTI, file), 'utf8').replace(/\r\n/g, '\n'));
   console.log(`\n══ ${file.replace('.md', '')} ${'═'.repeat(Math.max(0, 46 - file.length))}`);
   console.log(`   capitoli   : ${r.titoli.length}`);
   console.log(`   capoversi  : ${r.paragrafi}  (citazioni a parte: ${r.citazioni})`);

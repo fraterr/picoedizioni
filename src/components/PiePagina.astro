@@ -1,10 +1,15 @@
 ---
+import { getCollection } from 'astro:content';
 import Marca from './Marca.astro';
 import Email from './Email.astro';
 import { u } from '../lib/percorsi';
 import sito from '../data/sito.json';
 
 const anno = new Date().getFullYear();
+// L'anno di partenza è quello della traduzione più vecchia del catalogo,
+// non un numero cablato che invecchia male.
+const anni = (await getCollection('libri')).map((l) => l.data.annoTraduzione);
+const primoAnno = anni.length ? Math.min(...anni) : anno;
 const { collegamenti } = sito;
 ---
 
@@ -43,6 +48,7 @@ const { collegamenti } = sito;
             )
           }
           <li><Email etichetta="Scrivimi" /></li>
+          <li><a href={u('/feed.xml')}>Feed RSS</a></li>
         </ul>
       </nav>
 
@@ -59,7 +65,7 @@ const { collegamenti } = sito;
 
     <div class="pie-pagina__coda">
       <p>
-        Testi originali di pubblico dominio. Traduzioni {anno > 2022 ? `2022–${anno}` : '2022'}
+        Testi originali di pubblico dominio. Traduzioni {anno > primoAnno ? `${primoAnno}–${anno}` : primoAnno}
         Pico Edizioni, sotto licenza
         <a href={sito.licenza.url} rel="license noopener">{sito.licenza.nome}</a>.
       </p>

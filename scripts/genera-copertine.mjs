@@ -28,7 +28,9 @@ export const CHROME = [
 
 /** Legge i campi che servono dal frontmatter della scheda. */
 export function leggiScheda(percorso) {
-  const testo = readFileSync(percorso, 'utf8');
+  // I fine riga si normalizzano subito: un checkout Windows può arrivare in
+  // CRLF, e le espressioni regolari qui sotto presuppongono LF.
+  const testo = readFileSync(percorso, 'utf8').replace(/\r\n/g, '\n');
   const fm = testo.match(/^---\n([\s\S]*?)\n---/)[1];
   const campo = (nome) => {
     const m = fm.match(new RegExp(`^${nome}:\\s*(.*)$`, 'm'));
@@ -43,6 +45,7 @@ export function leggiScheda(percorso) {
     titoloOriginale: campo('titoloOriginale'),
     annoOriginale: campo('annoOriginale'),
     annoTraduzione: campo('annoTraduzione'),
+    edizione: Number(campo('edizione')) || 1,
     colore: campo('colore') || 'zabaione',
     corpo: testo.slice(testo.indexOf('---', 4) + 4).trim(),
   };

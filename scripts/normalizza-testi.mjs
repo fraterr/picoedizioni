@@ -40,7 +40,7 @@ const DIR_APPARATO = [
 // libri divisi in capitoli ne offrono uno intero. Ma un libro senza capitoli
 // non incontrerebbe mai quel titolo: da qui il tetto massimo.
 const PAROLE_ANTEPRIMA = 1200;
-const PAROLE_ANTEPRIMA_MAX = 2600;
+const PAROLE_ANTEPRIMA_MAX = 2800;
 
 const prova = process.argv.includes('--prova');
 
@@ -153,7 +153,7 @@ const conta = (t, r) => (t.match(r) || []).length;
 
 for (const file of readdirSync(DIR_TESTI).filter((f) => f.endsWith('.md'))) {
   const percorso = join(DIR_TESTI, file);
-  const sorgente = readFileSync(percorso, 'utf8');
+  const sorgente = readFileSync(percorso, 'utf8').replace(/\r\n/g, '\n');
   const frontmatter = sorgente.match(/^---[\s\S]*?---\n/)[0];
   const corpo = sorgente.slice(frontmatter.length);
 
@@ -247,7 +247,7 @@ for (const cartella of DIR_APPARATO) {
   if (!existsSync(cartella)) continue;
   for (const file of readdirSync(cartella).filter((f) => f.endsWith('.md'))) {
     const percorso = join(cartella, file);
-    const sorgente = readFileSync(percorso, 'utf8');
+    const sorgente = readFileSync(percorso, 'utf8').replace(/\r\n/g, '\n');
     const nuovo = normalizzaApparato(sorgente);
     if (nuovo !== sorgente) {
       toccati++;

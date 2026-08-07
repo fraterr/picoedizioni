@@ -18,14 +18,3 @@ export function peso(percorsoPubblico: string): string | null {
     return null;
   }
 }
-
-/** Vero se il file esiste in public/. */
-export function esiste(percorsoPubblico: string): boolean {
-  if (!percorsoPubblico) return false;
-  try {
-    statSync(join(process.cwd(), 'public', percorsoPubblico));
-    return true;
-  } catch {
-    return false;
-  }
-}

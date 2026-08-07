@@ -55,7 +55,7 @@ function inFrasi(testo) {
 }
 
 // ── il testo italiano, capitolo per capitolo ────────────────────────────────
-const sorgente = readFileSync(FILE_TESTO, 'utf8');
+const sorgente = readFileSync(FILE_TESTO, 'utf8').replace(/\r\n/g, '\n');
 const frontmatter = sorgente.match(/^---[\s\S]*?---\n/)[0];
 const corpo = sorgente.slice(frontmatter.length);
 

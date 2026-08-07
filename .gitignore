@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .astro/
+Traduzioni/
 .DS_Store
 Thumbs.db
 *.log

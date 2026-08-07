@@ -34,11 +34,11 @@ const mostraFiltri = autori.length > 1;
         <div class="filtri non-stampare">
           <span class="occhiello">Autore</span>
           <div class="filtri__elenco" role="group" aria-label="Filtra per autore">
-            <button type="button" class="filtro filtro--attivo" data-autore="tutti">
+            <button type="button" class="filtro filtro--attivo" data-autore="tutti" aria-pressed="true">
               Tutti <span class="filtro__conto">{libri.length}</span>
             </button>
             {autori.map((autore) => (
-              <button type="button" class="filtro" data-autore={autore}>
+              <button type="button" class="filtro" data-autore={autore} aria-pressed="false">
                 {autore}
                 <span class="filtro__conto">
                   {libri.filter((l) => l.data.autore === autore).length}
@@ -85,7 +85,10 @@ const mostraFiltri = autori.length > 1;
     for (const bottone of bottoni) {
       bottone.addEventListener('click', () => {
         const scelto = bottone.dataset.autore;
-        bottoni.forEach((b) => b.classList.toggle('filtro--attivo', b === bottone));
+        bottoni.forEach((b) => {
+          b.classList.toggle('filtro--attivo', b === bottone);
+          b.setAttribute('aria-pressed', String(b === bottone));
+        });
         for (const voce of griglia.children) {
           const suo = (voce as HTMLElement).dataset.autore;
           (voce as HTMLElement).hidden = scelto !== 'tutti' && suo !== scelto;

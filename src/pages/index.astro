@@ -49,6 +49,14 @@ const daMostrare = inEvidenza.length > 0 ? inEvidenza : libri.slice(0, 3);
       <div class="griglia-libri">
         {daMostrare.map((libro) => <SchedaCatalogo libro={libro} />)}
       </div>
+
+      {
+        libri.length > daMostrare.length && (
+          <p class="tutte">
+            <a href={u('/catalogo/')}>Tutte le traduzioni ({libri.length}) →</a>
+          </p>
+        )
+      }
     </div>
   </section>
 
@@ -165,6 +173,28 @@ const daMostrare = inEvidenza.length > 0 ? inEvidenza : libri.slice(0, 3);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     gap: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* Il ponte verso il catalogo completo, per chi arriva in fondo alla
+     griglia senza essere passato dal bottone in cima. */
+  .tutte {
+    margin-top: clamp(2rem, 5vw, 3rem);
+    text-align: right;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+  }
+
+  .tutte a {
+    text-decoration: none;
+    color: var(--inchiostro-tenue);
+  }
+
+  .tutte a:hover {
+    color: var(--inchiostro);
+    text-decoration: underline;
+    text-decoration-color: var(--zabaione-vivo);
+    text-underline-offset: 0.25em;
   }
 
   .sezione--fondo {

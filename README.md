@@ -168,6 +168,16 @@ npm run genera-epub        # 5. l'ePub definitivo, metadati corretti
 npm run genera-pdf         # 6. il PDF impaginato
 ```
 
+C'è anche `npm run genera-icone`, fuori dalla filiera dei libri: rigenera
+l'immagine per le anteprime social (`public/social.png`) e l'icona per i
+segnalibri iOS. Serve solo se cambiano nome, motto o sottotitolo del sito.
+
+> **Il numero di edizione.** Ogni scheda ha un campo `edizione` (parte da 1).
+> Quando si pubblica una revisione di una traduzione va alzato di uno e vanno
+> rigenerati ePub e PDF: la dicitura («Prima edizione digitale», «Seconda
+> edizione digitale, riveduta»…) compare nel colophon dei file e nella scheda,
+> così chi ha scaricato un file sa se è aggiornato.
+
 I passi 3–6 si possono rilanciare all'infinito: sono tutti deterministici e
 non distruggono nulla. Il passo 1 si usa solo per importare un libro nuovo.
 
@@ -293,6 +303,14 @@ scripts/
 numero di libri. I titoli vivono nel catalogo. Quando gli autori diventeranno
 più di uno, nel catalogo comparirà da solo un filtro per autore: non c'è niente
 da attivare.
+
+**Ogni libro si legge anche online**, per intero, su `/catalogo/<nome>/leggi/`:
+è la stessa veste tipografica dell'anteprima, e rende il testo indicizzabile
+dai motori di ricerca. La pagina nasce da sola per ogni libro che ha il testo
+integrale in `src/content/testi/`.
+
+**C'è un feed RSS** su `/feed.xml`: una voce per volume, generata dal catalogo.
+Chi lo segue sa delle nuove traduzioni senza iscriversi a niente.
 
 **Tutti i colori e i caratteri** stanno nelle variabili in cima a
 `src/styles/globale.css`. Cambiare il giallo lì lo cambia in tutto il sito.

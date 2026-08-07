@@ -28,7 +28,10 @@ const {
 
 const titoloCompleto = titolo === sito.nome ? `${sito.nome} — ${sito.sottotitolo}` : `${titolo} · ${sito.nome}`;
 const canonico = new URL(Astro.url.pathname, Astro.site);
-const anteprimaSocial = immagine ? new URL(u(immagine), Astro.site) : undefined;
+// Le schede dei libri portano la loro copertina; tutte le altre pagine
+// hanno una carta di riserva con la marca e il motto (public/social.png,
+// rigenerabile con `npm run genera-icone`).
+const anteprimaSocial = new URL(u(immagine || '/social.png'), Astro.site);
 ---
 
 <!doctype html>
@@ -40,7 +43,14 @@ const anteprimaSocial = immagine ? new URL(u(immagine), Astro.site) : undefined;
     <meta name="description" content={descrizione} />
     <link rel="canonical" href={canonico} />
     <link rel="icon" href={u('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={u('/apple-touch-icon.png')} />
     <link rel="sitemap" href={u('/sitemap-index.xml')} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${sito.nome} — nuove traduzioni`}
+      href={u('/feed.xml')}
+    />
     <meta name="theme-color" content="#fbf8f1" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#14120e" media="(prefers-color-scheme: dark)" />
 
@@ -50,8 +60,10 @@ const anteprimaSocial = immagine ? new URL(u(immagine), Astro.site) : undefined;
     <meta property="og:description" content={descrizione} />
     <meta property="og:url" content={canonico} />
     <meta property="og:locale" content="it_IT" />
-    {anteprimaSocial && <meta property="og:image" content={anteprimaSocial} />}
-    <meta name="twitter:card" content={anteprimaSocial ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={anteprimaSocial} />
+    {/* La copertina è verticale: nel riquadro largo verrebbe tagliata.
+        Meglio la miniatura per i libri, il riquadro largo per la carta. */}
+    <meta name="twitter:card" content={immagine ? 'summary' : 'summary_large_image'} />
 
     {/* Applica il tema prima del primo disegno, per non far lampeggiare la pagina. */}
     <script is:inline>

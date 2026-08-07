@@ -1,44 +1,37 @@
 ---
+// La lettura integrale nel browser: il testo completo del volume, nella
+// stessa veste tipografica dell'anteprima. Terza via accanto a ePub e PDF,
+// senza scaricare nulla — e il testo diventa indicizzabile dai motori.
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import Base from '../../../layouts/Base.astro';
-import { u, minutiLettura } from '../../../lib/percorsi';
+import { u, numero, minutiLettura } from '../../../lib/percorsi';
 
-// Esiste una pagina di anteprima solo per i libri che ne hanno una: il legame
-// passa dal campo "libro" dell'anteprima, non dal nome del file.
 export async function getStaticPaths() {
   const libri = await getCollection('libri');
-  const anteprime = await getCollection('anteprime');
   const testi = await getCollection('testi');
 
   return libri.flatMap((libro) => {
-    const anteprima = anteprime.find((a) => a.data.libro === libro.slug);
-    const haTesto = testi.some((t) => t.data.libro === libro.slug);
-    return anteprima ? [{ params: { slug: libro.slug }, props: { libro, anteprima, haTesto } }] : [];
+    const testo = testi.find((t) => t.data.libro === libro.slug);
+    return testo ? [{ params: { slug: libro.slug }, props: { libro, testo } }] : [];
   });
 }
 
 interface Props {
   libro: CollectionEntry<'libri'>;
-  anteprima: CollectionEntry<'anteprime'>;
-  haTesto: boolean;
+  testo: CollectionEntry<'testi'>;
 }
 
-const { libro, anteprima, haTesto } = Astro.props;
+const { libro, testo } = Astro.props;
 const d = libro.data;
-
-const { Content } = await anteprima.render();
-const parole = anteprima.data.parole;
-const percentuale = Math.round((parole / d.parole) * 100);
-// «l'8%», «l'11%», ma «il 5%»: l'articolo segue il suono del numero.
-const articoloPercento = [8, 11].includes(percentuale) ? "l'" : 'il ';
+const { Content } = await testo.render();
 ---
 
 <Base
-  titolo={`${d.titolo} — anteprima`}
-  descrizione={`Le prime pagine di ${d.titolo} di ${d.autore}, nella traduzione italiana di Pico Edizioni.`}
+  titolo={`${d.titolo} — lettura integrale`}
+  descrizione={`Il testo integrale di ${d.titolo} di ${d.autore}, nella traduzione italiana di Pico Edizioni. Da leggere online, gratuitamente.`}
   immagine={d.copertina}
-  tipo="article"
+  tipo="book"
 >
   <div class="contenitore">
     <nav class="briciole non-stampare" aria-label="Percorso">
@@ -46,15 +39,16 @@ const articoloPercento = [8, 11].includes(percentuale) ? "l'" : 'il ';
       <span aria-hidden="true">→</span>
       <a href={u(`/catalogo/${libro.slug}/`)}>{d.titolo}</a>
       <span aria-hidden="true">→</span>
-      <span aria-current="page">Anteprima</span>
+      <span aria-current="page">Lettura</span>
     </nav>
 
     <article class="lettura">
       <header class="lettura__apertura">
         <p class="occhiello">{d.autore}</p>
         <h1>{d.titolo}</h1>
-        <p class="lettura__dati tenue">
-          Anteprima · {minutiLettura(parole)} minuti di lettura · circa {articoloPercento}{percentuale}% del volume
+        {d.sottotitolo && <p class="lettura__sottotitolo">{d.sottotitolo}</p>}
+        <p class="lettura__dati tenue non-stampare">
+          Testo integrale · {numero(d.parole)} parole · circa {minutiLettura(d.parole)} minuti di lettura
         </p>
         <div class="filetto-ornato" aria-hidden="true"><span>◆</span></div>
       </header>
@@ -65,22 +59,16 @@ const articoloPercento = [8, 11].includes(percentuale) ? "l'" : 'il ';
 
       <footer class="lettura__chiusa non-stampare">
         <div class="filetto-ornato" aria-hidden="true"><span>◆</span></div>
-        <p class="lettura__seguito">L'anteprima finisce qui.</p>
+        <p class="lettura__seguito">Fine.</p>
         <p class="tenue">
-          Il volume intero è di {d.pagine} pagine e si scarica gratuitamente,
-          senza registrazione.
+          Il volume si può portare via in ePub o in PDF, gratuitamente e senza
+          registrazione.
         </p>
         <p class="lettura__azioni">
-          {
-            haTesto && (
-              <a class="bottone" href={u(`/catalogo/${libro.slug}/leggi/`)}>
-                Continua a leggere online
-              </a>
-            )
-          }
-          <a class={`bottone${haTesto ? ' bottone--vuoto' : ''}`} href={u(d.epub)} download>
-            Scarica l'ePub
-          </a>
+          <a class="bottone" href={u(d.epub)} download>Scarica l'ePub</a>
+          {d.pdf && (
+            <a class="bottone bottone--vuoto" href={u(d.pdf)} download>Scarica il PDF</a>
+          )}
           <a class="bottone bottone--vuoto" href={u(`/catalogo/${libro.slug}/`)}>
             Torna alla scheda
           </a>
@@ -130,6 +118,12 @@ const articoloPercento = [8, 11].includes(percentuale) ? "l'" : 'il ';
 
   .lettura__apertura h1 {
     font-size: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  }
+
+  .lettura__sottotitolo {
+    margin-top: 0.6rem;
+    font-style: italic;
+    color: var(--inchiostro-tenue);
   }
 
   .lettura__dati {

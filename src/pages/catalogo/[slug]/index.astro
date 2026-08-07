@@ -24,6 +24,8 @@ const { Content } = await libro.render();
 // L'anteprima si lega al libro tramite il campo "libro", non tramite il nome
 // del file: così il CMS può chiamare i file come vuole.
 const anteprima = (await getCollection('anteprime')).find((a) => a.data.libro === libro.slug);
+// Se c'è il testo integrale, esiste anche la pagina di lettura online.
+const testoIntegrale = (await getCollection('testi')).find((t) => t.data.libro === libro.slug);
 
 const pesoEpub = peso(d.epub);
 const pesoPdf = peso(d.pdf);
@@ -32,6 +34,14 @@ const altri = (await getCollection('libri'))
   .filter((l) => l.slug !== libro.slug)
   .sort((a, b) => b.data.pubblicato.valueOf() - a.data.pubblicato.valueOf())
   .slice(0, 3);
+
+// La stessa dicitura del colophon di ePub e PDF: chi ha scaricato un file
+// può confrontarla e capire se è aggiornato.
+const ORDINALI = ['Prima', 'Seconda', 'Terza', 'Quarta', 'Quinta', 'Sesta', 'Settima', 'Ottava', 'Nona', 'Decima'];
+const etichettaEdizione =
+  d.edizione === 1
+    ? 'Prima edizione digitale'
+    : `${ORDINALI[d.edizione - 1] ?? `${d.edizione}ª`} edizione digitale, riveduta`;
 
 const datiStrutturati = {
   '@context': 'https://schema.org',
@@ -78,7 +88,7 @@ const datiStrutturati = {
 
         <p class="volume__originale tenue">
           Titolo originale: <em>{d.titoloOriginale}</em>, {d.annoOriginale}.<br />
-          Traduzione italiana di Pico Edizioni, {d.annoTraduzione}.
+          Traduzione italiana di Pico Edizioni, {d.annoTraduzione}. {etichettaEdizione}.
         </p>
 
         <p class="volume__quarta">{d.quarta}</p>
@@ -119,6 +129,14 @@ const datiStrutturati = {
               anteprima && (
                 <a class="bottone bottone--vuoto" href={u(`/catalogo/${libro.slug}/anteprima/`)}>
                   Leggi l'anteprima
+                </a>
+              )
+            }
+
+            {
+              testoIntegrale && (
+                <a class="bottone bottone--vuoto" href={u(`/catalogo/${libro.slug}/leggi/`)}>
+                  Leggi online
                 </a>
               )
             }

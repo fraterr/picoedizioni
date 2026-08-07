@@ -14,7 +14,9 @@
   --carta-scheda: #fffdf8;
   --inchiostro: #1c1a16;
   --inchiostro-tenue: #5c564a;
-  --inchiostro-lieve: #8c8579;
+  /* Usato per occhielli e dati minuti: deve reggere il contrasto WCAG AA
+     anche in corpo piccolo, quindi niente più chiaro di così. */
+  --inchiostro-lieve: #7a7366;
   --zabaione: #f0d68c;
   --zabaione-vivo: #e6c25e;
   --zabaione-fondo: #f9eeca;
@@ -42,7 +44,7 @@
     --carta-scheda: #1e1b15;
     --inchiostro: #ece5d6;
     --inchiostro-tenue: #a89f8c;
-    --inchiostro-lieve: #7b7364;
+    --inchiostro-lieve: #8b8271;
     --zabaione: #e8c86a;
     --zabaione-vivo: #f0d68c;
     --zabaione-fondo: #2b2517;
@@ -59,7 +61,7 @@
   --carta-scheda: #1e1b15;
   --inchiostro: #ece5d6;
   --inchiostro-tenue: #a89f8c;
-  --inchiostro-lieve: #7b7364;
+  --inchiostro-lieve: #8b8271;
   --zabaione: #e8c86a;
   --zabaione-vivo: #f0d68c;
   --zabaione-fondo: #2b2517;
